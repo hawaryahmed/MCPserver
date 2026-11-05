@@ -1,53 +1,87 @@
-# SME Cyber Maturity MCP — public demo v0.4.0
+# SME Cyber Maturity MCP — v0.5.0
 
-Independent ENISA-informed assessment engine. Not an official ENISA product or grading system.
+Independent ENISA-informed self-assessment. Not an official ENISA product, score, audit or certification.
 
-## Render Free configuration
+## Deployment
 
-`render.yaml` provisions one native Rust web service with `plan: free`: **$0/month base compute, 0.1 CPU, 512 MB RAM**. CPU and RAM come from the plan; do not add unsupported CPU/RAM YAML fields. No persistent disk, database, or other paid resource is declared. Render bandwidth/build usage limits still apply.
+`render.yaml` remains a native Rust web service on **Free: $0/month base compute, 0.1 CPU, 512 MB RAM**. It provisions no paid disk or database. Render usage limits apply.
 
-Assessment files use the ephemeral `./data` directory. Records are lost on restart, redeploy, or idle spin-down. Free services spin down after 15 minutes of inactivity and may take about a minute to wake up. Open `/healthz` and wait before connecting ChatGPT after an idle period.
+| Setting | Value |
+| --- | --- |
+| Runtime | `rust` |
+| Plan | `free` |
+| Build | `cargo build --release --locked --manifest-path server/Cargo.toml` |
+| Start | `./server/target/release/enisa-sme-mcp` |
+| Host / port | `HOST=0.0.0.0`, `PORT=10000` |
+| Storage | `ENISA_MCP_DATA_DIR=./data` |
+| Allowed browser origin | `MCP_ALLOWED_ORIGINS=https://chatgpt.com` |
+| Health check | `/healthz` (version `0.5.0`) |
 
-## Update your existing deployment
+Connect ChatGPT to `https://sme-cyber-maturity-mcp.onrender.com/mcp` using **No Authentication**. Merge/deploy the update and refresh the app's tools before using new actions. A manually configured Render service must independently be set to Rust / Free; repository YAML does not prove its current runtime or billing plan.
 
-1. Merge this change and deploy the latest `main` commit in Render.
-2. Use a native **Rust** Web Service with Instance Type **Free**, keeping Root Directory blank. The old Docker service may need to be replaced with a new Rust service; changing repository YAML alone does not change the runtime of an existing manually configured service. A new service may receive a different URL. Update your ChatGPT connection if it does.
+This is an anonymous shared demo. Anyone reaching the service can access, modify or delete assessments. Use fictional data only. Storage resets on restarts, redeploys and idle spin-down. Free services sleep after inactivity and can take about a minute to wake up. Open `/healthz` before a demonstration after idle time. Back up any existing paid disk before removing it; YAML changes do not guarantee existing disk charges stop.
 
-   Build Command: `cargo build --release --locked --manifest-path server/Cargo.toml`
+## Assessment workflow
 
-   Start Command: `./server/target/release/enisa-sme-mcp`
+Open **Assessment overview**, choose scope and start. Each question includes answer text, implementation level, explanation, example, evidence reference, owner and a conditional follow-up. The follow-up changes for partial/missing, consistent/tested, Unknown and NA answers. Back/edit and resume are supported.
 
-   Environment: `HOST=0.0.0.0`, `PORT=10000`, `ENISA_MCP_DATA_DIR=./data`, `MCP_ALLOWED_ORIGINS=https://chatgpt.com`. The relative data directory is writable in the native runtime.
-3. If the old paid deployment has a disk, export any records you want to keep before detaching it. Free services cannot have persistent disks. Removing the disk block from YAML does not guarantee Render deletes an existing disk or stops its charges. Check the Render dashboard and remove the old disk yourself after backup.
-4. Remove the old `MCP_API_KEY` environment variable if desired. The demo ignores it and never requires a key.
-5. Set `MCP_ALLOWED_ORIGINS=https://chatgpt.com` (included in the Blueprint). Requests without an Origin header are accepted; unexpected Origin headers remain blocked.
-6. Verify `/healthz` returns version `0.4.0`. Until then, the older authenticated version may still be running.
+Each assessment is pinned to a questionnaire version. Completion means every scoped question has an answer, including Unknown or justified NA; it does not mean every control is implemented or verified. Completed assessments reopen their report. Scores, coverage and evidence confidence are separate.
 
-## Connect through ChatGPT
+**Summarize in chat** sends the selected assessment ID and saved results to ChatGPT. Completion also updates the host's model context. If a host does not support chat messages, use the ID to ask for a summary manually. No automatic messages are sent just by saving answers.
 
-Server URL: `https://sme-cyber-maturity-mcp.onrender.com/mcp`
+Recommendations include a specific action, owner role, effort, dependencies, expected outcome and verification evidence. Priorities and target dates are unchanged from the prior method; review them against actual business risk.
 
-Choose **No Authentication**, not OAuth. Recreate or update the connection if ChatGPT cached the old OAuth setting. No client ID, client secret, API key, or OAuth discovery endpoint is needed. All eight tools declare `securitySchemes: [{"type":"noauth"}]`.
+## Single source of assessment content
 
-This is a public, shared demo. Anyone reaching it can list, read, change and delete assessments. Use fictitious data only. There is no user/tenant isolation, OAuth, application audit trail or rate limit. All six tools remain available for demonstration.
+`assessment/banks/1.0.0.json` owns questions, domain/mode membership, explanations, examples, conditional follow-ups, score labels, scoring policy and remediation metadata. Rust parses and validates it once at startup, with the file embedded into the executable. Content edits need a rebuild/redeploy but no change to scoring logic.
 
-## Endpoints
+Do not modify a released bank in place. For a questionnaire or scoring change, add a new versioned bank and register it in `content.rs`, retaining existing versions. New assessments select the latest bank; existing assessments use their stored `bank_version`. Unknown versions are rejected rather than silently rescored. The typed score contract remains 0–4 / U / NA.
 
-- GET `/healthz`: public status and version.
-- POST `/mcp`: anonymous JSON-RPC; notifications return empty HTTP 202.
-- GET/DELETE `/mcp`: HTTP 405, because this stateless server does not provide an SSE stream or sessions. Opening `/mcp` in a browser is not a functionality test.
-- Supported MCP versions: `2025-03-26`, `2025-06-18`, `2025-11-25`.
-- Requests require Content-Type `application/json` and Accept `application/json, text/event-stream`.
-- Send `MCP-Protocol-Version` after initialization. The request limit is 256 KiB.
+Unversioned v0.4.0 records are read as bank `1.0.0`, revision `0`. Their answers remain unchanged. Version/revision fields are written on the next successful save. Existing records remain readable with their original text; new writes/imports enforce field and size limits.
+
+The human-readable skill references are **generated** from the bank:
 
 ```sh
-curl https://sme-cyber-maturity-mcp.onrender.com/mcp \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json, text/event-stream' \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+node assessment/tools/generate-references.mjs
 ```
 
-## Development and checks
+CI checks that references and the bundled widget match their sources. Skills describe the workflow and obtain questionnaire content through MCP. `chatgpt-plugin/skills/` holds reusable instructions; preserve the target installed plugin's own generated manifest and App binding when syncing those skills. Do not replace another connection's identity with a checked-in App ID.
+
+## Rust modules
+
+| Module | Responsibility |
+| --- | --- |
+| `main.rs` | Startup and stdio entry point |
+| `model.rs` | Typed requests, records, score/mode enums and validation |
+| `content.rs` | Versioned bank registry and startup validation |
+| `assessment.rs` | Assessment lifecycle, saves, progress and backup/restore |
+| `scoring.rs` | Deterministic scores, gaps and completion handoff |
+| `storage.rs` | Atomic JSON file persistence |
+| `mcp.rs` | Tool schemas/metadata and JSON-RPC routing |
+| `http.rs` | HTTP transport, Origin checks, limits and serialized access |
+| `ui.rs` | Embedded widget resource and overview presentation |
+
+## Tools and compatibility
+
+Read actions: `assessment_overview`, `get_assessment`, `get_question_bank`, `calculate_maturity`, `list_assessments`, `export_assessment`.
+
+Write actions: `create_assessment`, `record_answer`, `delete_assessment`, `import_assessment`.
+
+`create_assessment` returns initial form data, including `assessment_id`, `bank_version` and `revision`. `record_answer` returns the saved answer, new revision, progress and status in one call; the final answer also returns `report` and `handoff`. The widget does not re-fetch the whole questionnaire after every save.
+
+Send `expected_revision` when saving. If it is stale, the server returns an MCP tool error with `structuredContent.error.code = "revision_conflict"` and does not modify the record. The form keeps the local draft and offers **Reload saved version (keep draft)** for review and retry. Omitting the revision remains accepted for legacy clients, so those clients do not receive stale-write protection. All storage operations remain serialized within one process; do not run multiple processes against the same directory.
+
+Typed Rust inputs generate tool JSON Schemas. Invalid scores/types, unexpected fields, unjustified NA and oversized text are rejected on the server. New answer limits: answer text 12,000 characters, follow-up 6,000, evidence/NA justification 4,000 each, owner 160, legacy date 80. The total saved record limit is 128 KiB and the HTTP request limit is 256 KiB. Old records above these limits remain readable/exportable but require shorter content before saving/restoring under the demo limits.
+
+An evidence reference or caller-supplied `verified_at` date never grants a verified status. This demo reports `evidence_confidence: self_reported` and `independently_verified: 0`.
+
+## Backup and restore
+
+Use **Export backup**, then **Download JSON**. Downloads use the MCP Apps host bridge; if the host lacks support or the user cancels, the backup JSON remains visible for copying. Keep it outside the ephemeral service.
+
+Use **Restore a backup** on the overview to choose an exported JSON file or paste its contents. `import_assessment` validates the format, bank version, question IDs, answers and limits, then assigns a **new ID** and revision 0. It never overwrites the source record. Backups contain the answers and question-bank version; they are not proof of independent verification. There is no encrypted backup or authentication in this demo.
+
+## Development and tests
 
 ```sh
 cargo test --locked --manifest-path server/Cargo.toml
@@ -55,38 +89,25 @@ cargo build --locked --manifest-path server/Cargo.toml
 ENISA_MCP_DATA_DIR=./data server/target/debug/enisa-sme-mcp
 ```
 
-Run `python3 tests/smoke.py` to launch a temporary local server and test the anonymous assessment workflow. For remote verification: `python3 tests/smoke.py https://sme-cyber-maturity-mcp.onrender.com`. The test creates and deletes its own assessment. Restart persistence in the local test checks file handling only; it does not imply durability on Render Free.
+For stdio: `server/target/debug/enisa-sme-mcp --stdio`.
 
-For stdio clients use `server/target/debug/enisa-sme-mcp --stdio`. No secret is needed. Deployment uses Render's native Rust runtime; Docker files are not required.
+The widget is prebundled HTML/CSS/JavaScript in `web/dist/assessment.html`, embedded in Rust. Node and browser tooling are development/CI-only; Render needs no Node or Python runtime.
 
-Tools: `get_question_bank`, `create_assessment`, `record_answer`, `calculate_maturity`, `list_assessments`, `delete_assessment`. Scoring is independent and unchanged. Evidence references are self-reported and are not proof of verification.
+```sh
+cd web
+npm ci
+npm run build
+npx playwright install chromium --only-shell
+npm test
+```
+
+The browser test uses a sandboxed cross-origin MCP Apps bridge and the real Rust backend. It checks the workflow, one-call saves, completion context/chat handoff, backup download/restore and stale-edit recovery. This does not certify real ChatGPT behavior on every client.
+
+`server/tests/fixtures/legacy-scoring-v0.4.0.json` contains 22 results captured from the previous executable. Tests preserve scores, coverage, maturity bands, unknown/NA handling, priorities and target dates. Existing HTTP smoke tests also remain available with `python3 tests/smoke.py`; Python is test-only.
 
 ## References
 
-- https://render.com/docs/deploy-rocket-rust
 - https://render.com/docs/compute-plans
 - https://render.com/docs/free
-- https://render.com/docs/blueprint-spec
-- https://developers.openai.com/plugins/build/auth
-- https://modelcontextprotocol.io/specification/2025-11-25/basic/transports
-
-See `VALIDATION.md` for actual verification results.
-
-
-## Interactive assessment in ChatGPT
-
-Call **Assessment overview** (`assessment_overview`) to open the embedded artifact. It starts with domains, scope and the demo notice, then asks one question at a time. Each question includes a multiline answer, score, evidence reference, responsible role, plain-language explanation, illustrative answer example and optional follow-up answer. Back, Save & Next, Unknown, resume by ID and results review are included. Existing answers remain compatible.
-
-New read actions: **Assessment overview** and **View assessment** (`get_assessment`). Existing tools now declare read/write annotations so ChatGPT can group them. `resources/list` and `resources/read` serve the UI resource. Only the overview render tool owns a UI template; form actions update it without creating duplicate artifacts.
-
-The `chatgpt-plugin/` directory contains the exact connected app binding plus three packaged skills: **Assessment overview**, **Guided assessment**, **Results and 90-day plan**. The native plugin settings layout belongs to ChatGPT; this package supplies the skill metadata and action annotations shown in that layout. It does not replace ChatGPT's settings page.
-
-After merging/deploying, refresh the existing app's tools (or recreate the connection if cached) and say **Show my assessment overview**. The installed skill update alone cannot add a UI to a server that has not been deployed. The plugin keeps its existing identity and connected App.
-
-## Widget development (development only)
-
-The production server remains Rust and uses the same native Render Free config. Browser HTML/CSS/JavaScript is bundled in `web/dist/assessment.html` and embedded into the Rust executable. Render's build needs no Node or Python runtime.
-
-To modify the widget: `cd web && npm ci && npm run build`. Commit the generated HTML with the source. CI checks reproducibility, compiles the Rust server and exercises the form in a browser through an MCP Apps bridge. The bridge test is not a substitute for testing on each ChatGPT client.
-
-Reference: https://developers.openai.com/plugins/build/chatgpt-ui
+- https://developers.openai.com/plugins/build/chatgpt-ui
+- https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes

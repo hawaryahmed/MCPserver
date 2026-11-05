@@ -66,7 +66,7 @@ try:
     assert status == 200 and response['result']['protocolVersion'] == '2025-11-25'
     assert request({'jsonrpc': '2.0', 'method': 'notifications/initialized'}) == (202, None)
     status, listed = request({'jsonrpc':'2.0', 'id':2, 'method':'tools/list'})
-    assert status == 200 and len(listed['result']['tools']) == 8
+    assert status == 200 and len(listed['result']['tools']) == 10
     assert all(t['securitySchemes'] == [{'type':'noauth'}] for t in listed['result']['tools'])
     assert len(call('get_question_bank', mode='quick')['questions']) == 12
     assessment_id = call('create_assessment', organization='Automated smoke test', mode='quick')['assessment_id']

@@ -1,10 +1,12 @@
-# v0.4.0 verification — 2026-11-05
+# v0.5.0 verification — 2026-11-05
 
-- Eleven Rust unit tests passed, including 30 question-specific guides, overview-before-creation, UI resource registration, old-answer compatibility, new answer fields, and read/write action metadata.
-- Locked debug build and live anonymous HTTP smoke test passed, including concurrency and restart file handling.
-- Headless Chromium test passed through a sandboxed cross-origin MCP Apps host bridge with the actual bundled widget and Rust backend: overview, creation, single-question form, explanations/examples, NA validation, follow-up save, Back/edit, completion score, resume, mobile layout and no JavaScript errors.
-- Mobile question layout visually inspected. Browser testing caught and fixed native form submission restrictions in sandboxed app frames; Save & Next now uses the tool bridge without an HTML form submission.
-- Production remains native Rust on Render Free; the UI is prebundled HTML/CSS/JavaScript embedded into the executable. Node tooling is development/CI-only.
-- Connected plugin updated separately with three skills; existing App binding and presentation preserved. Repository source includes the same package for review.
-- Real ChatGPT iframe behavior after deployment, mobile-specific host behavior, and Render's live deployment remain unverified until the PR is merged/deployed and the connection is refreshed.
-- Render Free storage remains ephemeral and public. No OAuth, tenant isolation or durable storage was added.
+- 14 Rust tests passed, including 22 score/coverage/maturity/priority fixtures captured from the previous v0.4.0 executable, registered-version validation, frozen question wording/guidance, legacy-record migration, single-call saves, server validation, completion/handoff, evidence-confidence separation and backup/restore.
+- A real HTTP concurrency test sends two writes with the same revision: exactly one is applied, the other returns revision_conflict, and storage contains one update.
+- Locked debug and optimized release builds passed.
+- Existing live HTTP smoke test passed with the new tool count and backward-compatible revision omission, including concurrent saves and process restart file handling.
+- Headless Chromium passed through a sandboxed cross-origin MCP Apps bridge using the actual Rust server and bundled widget. Coverage includes overview/create, one-question flow, conditional follow-ups, NA validation, save/back/edit, completion score, completed-resume behavior, one-call saves (no full get_assessment after each save), completion context and chat-message handoff, export/download/restore, stale-edit rejection/reload/draft recovery, authored remediation display and mobile overflow.
+- Skill references are generated from the versioned JSON bank. CI checks generated references and the bundled HTML for drift.
+- Native Rust / Render Free configuration is retained; no new paid resource, authentication or durable storage was added.
+- Real ChatGPT client download/message support and live Render deployment remain to be verified after merging/deploying and refreshing the app connection. The host-bridge test does not certify every ChatGPT client.
+- Old unversioned records default to bank 1.0.0 and revision 0. Text is retained on read. New writes/imports enforce documented limits; unusually large legacy records need shortened content to restore under those limits.
+- Revision is optional for legacy clients; stale-write protection applies when clients supply expected_revision. Storage remains single-process.

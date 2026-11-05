@@ -1,15 +1,25 @@
-# Original plugin scoring and reporting rubric
+<!-- GENERATED from assessment/banks/1.0.0.json. Edit the versioned bank, then regenerate. -->
+# Scoring policy · 1.0.0
 
-## Response scale
-0 = absent; 1 = ad hoc; 2 = partially in place; 3 = consistently operated; 4 = measured/tested/improved; U = unknown; NA = not applicable with justification.
+Independent ENISA-informed questionnaire; not official ENISA grading.
 
-## Calculation
-For each domain, observed score = sum of numeric answers / (4 * number of numeric answers) * 100. Coverage = number numeric / (numeric + U), excluding justified NA. State counts of numeric, U, and justified NA. When a domain has < 60% coverage or fewer than 3 numeric answers, mark its result *provisional* and do not assign an overall maturity category. Overall index, only when EACH domain meets coverage >= 60% and >= 3 scored items: simple equal-weight mean of the three domain percent scores. Report the score as a descriptive self-assessment, not verified security posture.
+- 0: Not in place
+- 1: Ad hoc
+- 2: Partly implemented
+- 3: Consistently implemented
+- 4: Measured, tested and improved
+- U: Unknown
+- NA: Not applicable
 
-Optional INTERNAL maturity descriptors (not ENISA thresholds): 0-24% Initial; 25-49% Developing; 50-74% Managed; 75-100% Improving. Explicitly label as plugin-defined, not official ENISA Foundation/Advanced/Expert. For evidence confidence: low (answers only), moderate (documents supplied and checked for some controls), high only when substantial recent evidence is actually reviewed and/or controls technically verified; never infer evidence confidence from numeric score.
+Calculate each domain as numeric-score sum / (4 × numeric-answer count) × 100. Exclude NA from the denominator; count Unknown and unanswered as missing coverage, not zero.
 
-## Prioritization
-Use a transparent qualitative priority: Urgent/High/Medium/Low. Consider concrete business impact, internet/external exposure, ease of exploitation, actual known incidents, dependencies, implementation cost/time, and defense-in-depth. Unknown findings are 'needs verification' rather than actual failure. Include why and what evidence would confirm. Raise priority of account recovery, MFA, backups, offboarding, exposed secrets, critical SaaS/identity.
+Coverage = numeric answers / (numeric answers + unknown/unanswered) × 100. A domain is provisional below 60% coverage or fewer than 3 numeric answers. Only report an overall index when every domain passes; average the domain scores equally. Round displayed percentages to one decimal.
 
-## Deliverables
-For each gap provide: domain/question ID, observed answer/evidence status, business risk scenario, proposed control, owner, effort S/M/L, priority, 30/60/90 day target, proof of completion. Avoid invented financial losses or guarantee of risk elimination. Benchmark only if user provides legitimate peer dataset with provenance; otherwise omit.
+- From 0%: Initial
+- From 25%: Developing
+- From 50%: Managed
+- From 75%: Improving
+
+Create implementation gaps for scores below 3. Use each question's authored action, owner role, effort, dependencies, outcome, verification, priority and target. Review template priorities against business context. Completion means every question has an answer; it does not mean every control is implemented or verified.
+
+Evidence confidence is separate: an evidence reference or a caller-supplied verified_at date does not prove independent verification. This demo reports all answers as self-reported. Pin every assessment to its bank_version. Quick and Full results are not directly comparable.

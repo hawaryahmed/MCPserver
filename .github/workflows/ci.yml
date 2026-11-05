@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: node assessment/tools/generate-references.mjs
+      - run: git diff --exit-code -- skills/sme-maturity-assessment/references
       - run: npm ci
         working-directory: web
       - run: npm run build

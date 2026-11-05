@@ -5,7 +5,7 @@ description: Use when the user wants to start a cybersecurity maturity assessmen
 
 # Assessment overview
 
-Start by calling `assessment_overview` with `{}` to open the interactive assessment artifact. Do not create an assessment or ask the first assessment question before showing the overview. Summarize the three domains (People, Processes, Technology), the choice of Quick Baseline (12 questions) or Full Assessment (30 questions), the score scale and the final gap/90-day plan. Let the user choose the scope and start in the form.
+Start by calling `assessment_overview` with `{}` to open the interactive assessment artifact. Do not create an assessment or ask the first assessment question before showing the overview. Summarize the three domains (People, Processes, Technology), the choice of Quick Baseline or Full Assessment (use the counts returned by the server), the score scale and the final gap/90-day plan. Let the user choose the scope and start in the form.
 
 The form contains actual answer fields; do not replace it with a long chat questionnaire or a static list of blanks. It handles creation after the user clicks Start. Keep surrounding chat short and avoid repeating the artifact.
 

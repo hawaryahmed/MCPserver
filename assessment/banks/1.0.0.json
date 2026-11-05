@@ -1,0 +1,923 @@
+{
+  "version": "1.0.0",
+  "methodology": "Independent ENISA-informed questionnaire; not official ENISA grading.",
+  "sources": [
+    {
+      "title": "ENISA SME guidance",
+      "url": "https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes"
+    }
+  ],
+  "domains": [
+    "People",
+    "Processes",
+    "Technology"
+  ],
+  "score_scale": [
+    {
+      "value": "0",
+      "label": "Not in place"
+    },
+    {
+      "value": "1",
+      "label": "Ad hoc"
+    },
+    {
+      "value": "2",
+      "label": "Partly implemented"
+    },
+    {
+      "value": "3",
+      "label": "Consistently implemented"
+    },
+    {
+      "value": "4",
+      "label": "Measured, tested and improved"
+    },
+    {
+      "value": "U",
+      "label": "Unknown"
+    },
+    {
+      "value": "NA",
+      "label": "Not applicable"
+    }
+  ],
+  "policy": {
+    "max_score": 4,
+    "minimum_coverage_pct": 60,
+    "minimum_numeric_per_domain": 3,
+    "gap_below": 3,
+    "maturity_bands": [
+      {
+        "minimum": 0,
+        "label": "Initial"
+      },
+      {
+        "minimum": 25,
+        "label": "Developing"
+      },
+      {
+        "minimum": 50,
+        "label": "Managed"
+      },
+      {
+        "minimum": 75,
+        "label": "Improving"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "P01",
+      "domain": "People",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Is someone explicitly accountable for cybersecurity decisions and spend?",
+      "explanation": "Name a person who owns security decisions and can approve time or budget.",
+      "answer_example": "Our founder owns security; the IT provider handles changes after approval.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Security decisions have an accountable owner and backup. Who will address it?",
+        "high": "Who approves an urgent security fix when the usual owner is away?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Assign a security decision owner and deputy; document their authority and escalation route.",
+        "owner_role": "Founder",
+        "effort": "S",
+        "dependencies": [
+          "Leadership agreement"
+        ],
+        "expected_outcome": "Security decisions have an accountable owner and backup.",
+        "verification": "Named owner/deputy and an approved responsibility note.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "P02",
+      "domain": "People",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Are all staff and contractors taught practical phishing/account-security basics at onboarding?",
+      "explanation": "Include employees and contractors. Look for practical onboarding, not just a policy link.",
+      "answer_example": "New starters get phishing examples and an MFA walkthrough; contractors are not yet included.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Every new starter receives practical security instruction. Who will address it?",
+        "high": "When was the latest starter trained, and where is completion recorded?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Add practical phishing, MFA and reporting guidance to onboarding for staff and contractors; track completion.",
+        "owner_role": "People operations / security owner",
+        "effort": "S",
+        "dependencies": [
+          "Named onboarding owner"
+        ],
+        "expected_outcome": "Every new starter receives practical security instruction.",
+        "verification": "Onboarding checklist and anonymized completion records.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "P03",
+      "domain": "People",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Can staff report suspicious messages or incidents quickly without guessing whom to contact?",
+      "explanation": "People should know a clear, quick way to report suspicious activity.",
+      "answer_example": "We use a dedicated email and chat channel monitored by the operations lead.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Staff can report suspicious activity and receive a response. Who will address it?",
+        "high": "Who monitors reports outside normal working hours?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Publish one reporting channel and a monitored escalation contact; test a suspicious-message report.",
+        "owner_role": "Security owner",
+        "effort": "S",
+        "dependencies": [
+          "Named incident contact"
+        ],
+        "expected_outcome": "Staff can report suspicious activity and receive a response.",
+        "verification": "Published instructions and a test report with response time.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "P04",
+      "domain": "People",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Do owners of privileged/financial accounts know how to recognize and challenge suspicious requests?",
+      "explanation": "Check whether people handling money or admin access independently verify unusual requests.",
+      "answer_example": "Bank-detail changes require a callback to a known number and a second approver.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Impersonation requests face an independent verification step. Who will address it?",
+        "high": "How would you verify an urgent payment request apparently from the founder?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Require independent verification of payment, bank-detail and privileged-access requests using known contact details.",
+        "owner_role": "Finance / IT lead",
+        "effort": "S",
+        "dependencies": [
+          "List of sensitive request types"
+        ],
+        "expected_outcome": "Impersonation requests face an independent verification step.",
+        "verification": "Approved procedure and a redacted example of dual approval.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "P05",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Are contractor access rights reviewed when their work changes or ends?",
+      "explanation": "Remove or adjust contractor access when roles or engagements change.",
+      "answer_example": "The project owner checks accounts at contract end; SaaS access is still manual.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Expired contractor access is removed consistently. Who will address it?",
+        "high": "Which accounts did the most recent departing contractor lose access to?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Track contractor accounts and review access at role changes and contract end.",
+        "owner_role": "Project owner / IT lead",
+        "effort": "S",
+        "dependencies": [
+          "Contractor and account inventory"
+        ],
+        "expected_outcome": "Expired contractor access is removed consistently.",
+        "verification": "Redacted access review and one completed offboarding record.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "P06",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Are security responsibilities documented for outsourced IT or SaaS providers?",
+      "explanation": "Write down what your provider secures, what you secure, and how issues are escalated.",
+      "answer_example": "Our IT agreement lists patching and backup responsibilities but not incident reporting.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Provider and internal responsibilities are unambiguous. Who will address it?",
+        "high": "Who is responsible if the provider detects an account compromise?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Document security responsibilities, incident notification and escalation with each critical IT provider.",
+        "owner_role": "Vendor owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical provider list"
+        ],
+        "expected_outcome": "Provider and internal responsibilities are unambiguous.",
+        "verification": "Responsibility matrix and agreed escalation/notification terms.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "P07",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Is security discussed with company leadership when changes or purchases are proposed?",
+      "explanation": "Include security in leadership decisions about products, vendors and spending.",
+      "answer_example": "Leadership reviews major risks monthly and assigns a named owner for decisions.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Leadership explicitly funds or accepts material security risks. Who will address it?",
+        "high": "What was the most recent security decision leadership made?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Add a short security-risk review to leadership decisions about products, vendors and material changes.",
+        "owner_role": "Founder",
+        "effort": "S",
+        "dependencies": [
+          "Risk owner and decision forum"
+        ],
+        "expected_outcome": "Leadership explicitly funds or accepts material security risks.",
+        "verification": "Decision log with a risk, owner and recorded decision.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "P08",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Do teams practice an incident scenario (e.g., account compromise) at least annually?",
+      "explanation": "Rehearse a realistic incident so people know their roles before an emergency.",
+      "answer_example": "We rehearsed a stolen admin account scenario and logged actions to improve.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: The team can rehearse and improve incident decisions. Who will address it?",
+        "high": "Which improvement from the latest exercise has been completed?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Run an account-compromise tabletop exercise, record gaps and assign improvement owners and dates.",
+        "owner_role": "Incident lead",
+        "effort": "M",
+        "dependencies": [
+          "Incident contacts and basic response plan"
+        ],
+        "expected_outcome": "The team can rehearse and improve incident decisions.",
+        "verification": "Exercise record and tracked follow-up actions.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "P09",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Do staff understand rules for handling customer, financial and proprietary data?",
+      "explanation": "People should know which data is sensitive and how to share, store and dispose of it.",
+      "answer_example": "Staff use approved storage and avoid customer data in personal chat or AI tools.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Staff understand where sensitive data may be stored and shared. Who will address it?",
+        "high": "How are staff told which data can be shared with external tools?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Publish simple handling rules for customer, financial and proprietary data, including external sharing and AI tools.",
+        "owner_role": "Data owner",
+        "effort": "M",
+        "dependencies": [
+          "Sensitive data inventory"
+        ],
+        "expected_outcome": "Staff understand where sensitive data may be stored and shared.",
+        "verification": "Handling guidance and an anonymized awareness check.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "P10",
+      "domain": "People",
+      "modes": [
+        "full"
+      ],
+      "text": "Is security training adjusted after incidents, process changes, or identified weaknesses?",
+      "explanation": "Use incidents and observed weaknesses to improve training, then check understanding.",
+      "answer_example": "After a phishing report, we updated onboarding and tested the new reporting steps.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Training responds to actual weaknesses. Who will address it?",
+        "high": "How did you check whether the change improved staff behavior?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Review incidents and observed training gaps; update guidance and check whether staff apply the changes.",
+        "owner_role": "Security / people operations",
+        "effort": "M",
+        "dependencies": [
+          "Training material and lessons log"
+        ],
+        "expected_outcome": "Training responds to actual weaknesses.",
+        "verification": "Updated material, reason for change and follow-up check.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "R01",
+      "domain": "Processes",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Is there an up-to-date list of critical business services, systems and data owners?",
+      "explanation": "List services that matter to the business, their systems, data and accountable owners.",
+      "answer_example": "A shared inventory maps our app, identity provider and customer database to owners.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Critical services and dependencies are visible. Who will address it?",
+        "high": "When was the inventory last reviewed and who updates it?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Inventory critical business services, supporting systems, important data and accountable owners.",
+        "owner_role": "Operations lead",
+        "effort": "M",
+        "dependencies": [
+          "Leadership identification of critical services"
+        ],
+        "expected_outcome": "Critical services and dependencies are visible.",
+        "verification": "Dated inventory reviewed by service owners.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "R02",
+      "domain": "Processes",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Is there a recurring process for ranking cyber risks by business impact and likelihood?",
+      "explanation": "Rank specific risks using business impact and likelihood, and revisit them regularly.",
+      "answer_example": "We review a risk register each quarter; customer-data loss and account takeover rank highest.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Security work follows documented business priorities. Who will address it?",
+        "high": "What changed since the last risk review, and did priorities change?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Create a small risk register with impact, likelihood, owner, treatment and review date; review it regularly.",
+        "owner_role": "Security owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical-service inventory"
+        ],
+        "expected_outcome": "Security work follows documented business priorities.",
+        "verification": "Reviewed register with treatment decisions and owners.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "R03",
+      "domain": "Processes",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Are key legal, privacy, contractual and customer security obligations tracked?",
+      "explanation": "Track security and privacy obligations from contracts and applicable requirements.",
+      "answer_example": "Customer contracts and privacy obligations are tracked with owners and review dates.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Security commitments are discoverable and assigned. Who will address it?",
+        "high": "Who checks a new customer contract for security commitments?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Track contractual, privacy and applicable security obligations with accountable owners and review dates.",
+        "owner_role": "Business / legal owner",
+        "effort": "M",
+        "dependencies": [
+          "Relevant contracts and operating locations"
+        ],
+        "expected_outcome": "Security commitments are discoverable and assigned.",
+        "verification": "Obligations register referencing source requirements.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "R04",
+      "domain": "Processes",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Is there a documented incident response contact list and initial containment process?",
+      "explanation": "Keep usable incident contacts and initial steps for containing likely incidents.",
+      "answer_example": "Our runbook lists the incident lead, provider contacts and account lockout steps.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: The team can contact the right people and contain common incidents. Who will address it?",
+        "high": "Could the team access the runbook if company email were unavailable?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Write and rehearse initial steps for account compromise and service disruption; keep offline-accessible contacts.",
+        "owner_role": "Incident lead",
+        "effort": "M",
+        "dependencies": [
+          "Named response owner and provider contacts"
+        ],
+        "expected_outcome": "The team can contact the right people and contain common incidents.",
+        "verification": "Accessible runbook and a dated contact/response exercise.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "R05",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Are access requests/approvals and offboarding consistently documented?",
+      "explanation": "Document access approvals and reliably remove access when people leave.",
+      "answer_example": "The manager approves access by ticket; offboarding includes identity, Git and SaaS accounts.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Access is approved and promptly removed when no longer needed. Who will address it?",
+        "high": "How was the latest offboarding checked for missed accounts?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Use a documented approval and offboarding checklist covering identity, cloud, code and SaaS access.",
+        "owner_role": "IT lead",
+        "effort": "M",
+        "dependencies": [
+          "Account/service inventory"
+        ],
+        "expected_outcome": "Access is approved and promptly removed when no longer needed.",
+        "verification": "Approved access request and completed offboarding sample.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "R06",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Is there a backup and recovery plan with defined recovery needs for critical services?",
+      "explanation": "Define which services need recovery, how quickly, and how much data loss is tolerable.",
+      "answer_example": "The app must recover within a day with no more than a day's data loss; the plan names an owner.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Recovery priorities match business needs. Who will address it?",
+        "high": "Have recovery targets been tested against a real restore?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Set recovery-time and data-loss targets for critical services; document backup owners and restore dependencies.",
+        "owner_role": "Service owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical-service and dependency inventory"
+        ],
+        "expected_outcome": "Recovery priorities match business needs.",
+        "verification": "Approved recovery targets and a recovery runbook.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "R07",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Are material cloud/SaaS vendors evaluated and reassessed for security dependencies?",
+      "explanation": "Check critical vendors before use and when their access or risk changes.",
+      "answer_example": "We review security information and data access for critical vendors annually.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Material vendor risks are reviewed before and during use. Who will address it?",
+        "high": "Which vendor failure would cause the biggest business interruption?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Assess critical vendors for data access, service dependency and incident handling; schedule reassessment.",
+        "owner_role": "Vendor owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical vendor list"
+        ],
+        "expected_outcome": "Material vendor risks are reviewed before and during use.",
+        "verification": "Completed review with findings, owner and next review date.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "R08",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Is there a routine to patch, remediate, or accept risks with named owners and deadlines?",
+      "explanation": "Give findings an owner and due date; record risk acceptance rather than silently ignoring them.",
+      "answer_example": "We track patches and vulnerabilities with deadlines; exceptions need founder approval.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Findings are fixed or explicitly accepted within agreed deadlines. Who will address it?",
+        "high": "What happens when a high-priority finding passes its deadline?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Track remediation findings with owners and deadlines; document exceptions and escalate overdue high risks.",
+        "owner_role": "IT / engineering lead",
+        "effort": "M",
+        "dependencies": [
+          "Asset inventory and finding sources"
+        ],
+        "expected_outcome": "Findings are fixed or explicitly accepted within agreed deadlines.",
+        "verification": "Remediation backlog and an approved exception example.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "R09",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Are security-impacting changes reviewed, tested and logged before release?",
+      "explanation": "Review and test security-impacting changes before deploying them and retain a record.",
+      "answer_example": "Cloud permissions and production changes require review and a rollback plan.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Important changes are traceable and recoverable. Who will address it?",
+        "high": "How could you trace the last production permission change?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Require review, testing and a rollback plan for security-impacting production and permission changes.",
+        "owner_role": "Engineering lead",
+        "effort": "M",
+        "dependencies": [
+          "Change owners and production inventory"
+        ],
+        "expected_outcome": "Important changes are traceable and recoverable.",
+        "verification": "Reviewed change record with test and rollback evidence.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "R10",
+      "domain": "Processes",
+      "modes": [
+        "full"
+      ],
+      "text": "Are recovery and incident response plans tested, and lessons incorporated into improvements?",
+      "explanation": "Test recovery and incident plans, record lessons, and follow through on improvements.",
+      "answer_example": "A recovery exercise found a missing secret; the runbook and recovery process were corrected.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Plans work in practice and improve after testing. Who will address it?",
+        "high": "Who verifies that exercise actions are closed?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Test an actual recovery and incident scenario; record lessons and verify improvement actions are closed.",
+        "owner_role": "Incident / recovery lead",
+        "effort": "M",
+        "dependencies": [
+          "Response and recovery plans"
+        ],
+        "expected_outcome": "Plans work in practice and improve after testing.",
+        "verification": "Exercise/restore report and closed improvement tickets.",
+        "priority": "Medium",
+        "target_days": 90
+      }
+    },
+    {
+      "id": "T01",
+      "domain": "Technology",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Is phishing-resistant MFA enabled on privileged accounts and MFA on other critical accounts wherever supported?",
+      "explanation": "Prioritize admin, email and financial accounts. Passkeys or security keys resist phishing where supported.",
+      "answer_example": "Admin accounts use security keys; other critical accounts use MFA; one vendor is an exception.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Critical accounts have effective MFA with owned exceptions. Who will address it?",
+        "high": "Which critical accounts are still exceptions, and who owns fixing them?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Inventory critical accounts, enable phishing-resistant MFA for admins where supported, and track remaining MFA exceptions.",
+        "owner_role": "IT / identity owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical account list and recovery-access plan"
+        ],
+        "expected_outcome": "Critical accounts have effective MFA with owned exceptions.",
+        "verification": "Redacted MFA coverage report and exception register.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T02",
+      "domain": "Technology",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Are endpoints and operating systems supported, protected and updated?",
+      "explanation": "Use supported operating systems, apply updates and check protection is functioning.",
+      "answer_example": "Company laptops are supported, centrally updated and monitored for protection failures.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Endpoints stay supported, updated and protected. Who will address it?",
+        "high": "How do you find devices that missed updates or lost protection?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Inventory endpoints, replace unsupported systems and establish a monitored update/protection routine.",
+        "owner_role": "IT lead",
+        "effort": "M",
+        "dependencies": [
+          "Device inventory"
+        ],
+        "expected_outcome": "Endpoints stay supported, updated and protected.",
+        "verification": "Patch/support status report and protection-health review.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T03",
+      "domain": "Technology",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Are essential data and settings backed up, with restore tests completed?",
+      "explanation": "A backup is only useful if you can restore it. Include essential settings and dependencies.",
+      "answer_example": "Daily backups are separate from production; a sample restore was tested last month.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Backups can restore essential service data within agreed needs. Who will address it?",
+        "high": "What was restored, how long did it take, and did you verify its integrity?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Back up essential data and configuration separately from production; test a representative restore and measure recovery.",
+        "owner_role": "Recovery / IT owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical data and recovery targets"
+        ],
+        "expected_outcome": "Backups can restore essential service data within agreed needs.",
+        "verification": "Restore test recording integrity checks, duration and gaps.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T04",
+      "domain": "Technology",
+      "modes": [
+        "quick",
+        "full"
+      ],
+      "text": "Are admin privileges minimized and accounts uniquely attributable to individuals?",
+      "explanation": "Use individual accounts and only the permissions people actually need.",
+      "answer_example": "Staff have unique accounts; admin access is limited and reviewed quarterly.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Privileged actions are attributable and access is limited. Who will address it?",
+        "high": "Which users currently have privileged access, and why?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Replace shared identities with individual accounts; remove unnecessary admin access and review privileges regularly.",
+        "owner_role": "IT / identity owner",
+        "effort": "M",
+        "dependencies": [
+          "Account inventory"
+        ],
+        "expected_outcome": "Privileged actions are attributable and access is limited.",
+        "verification": "Privileged-access review and removal/approval records.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T05",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Is there a maintained inventory of cloud, SaaS, devices and critical external services?",
+      "explanation": "Track cloud accounts, SaaS, devices and external services, including their owners.",
+      "answer_example": "Our inventory includes approved SaaS and devices, but personal subscriptions need review.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Important assets and shadow services are visible. Who will address it?",
+        "high": "How would you discover a tool bought outside the normal approval process?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Maintain a cloud, SaaS, device and external-service inventory with owners; check for unapproved tools.",
+        "owner_role": "IT / operations lead",
+        "effort": "M",
+        "dependencies": [
+          "Procurement and identity records"
+        ],
+        "expected_outcome": "Important assets and shadow services are visible.",
+        "verification": "Dated asset list and reconciliation/review results.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "T06",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Are sensitive data encrypted in transit and at rest where applicable?",
+      "explanation": "Check how sensitive data is protected while moving and while stored, including backups.",
+      "answer_example": "Customer traffic uses TLS; databases and backups are encrypted with managed keys.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Sensitive data is encrypted with controlled key access. Who will address it?",
+        "high": "Who can access encryption keys or decrypt sensitive data?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Check encryption for sensitive data flows, storage and backups; review key access and remediate gaps.",
+        "owner_role": "Cloud / data owner",
+        "effort": "M",
+        "dependencies": [
+          "Sensitive-data flows and storage inventory"
+        ],
+        "expected_outcome": "Sensitive data is encrypted with controlled key access.",
+        "verification": "Redacted configuration review and key-access inventory.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "T07",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Are critical cloud/SaaS configurations reviewed against secure defaults?",
+      "explanation": "Review critical configurations rather than assuming vendor defaults are always sufficient.",
+      "answer_example": "We check cloud storage, sharing and identity settings against a documented baseline.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Critical services follow reviewed secure configurations. Who will address it?",
+        "high": "When did the last configuration review occur and what changed?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Review critical cloud/SaaS sharing, storage and identity settings against a documented secure baseline.",
+        "owner_role": "Cloud / IT owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical service inventory"
+        ],
+        "expected_outcome": "Critical services follow reviewed secure configurations.",
+        "verification": "Baseline comparison and remediation/exception records.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T08",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Do critical systems produce accessible security logs and actionable alerts?",
+      "explanation": "Collect useful logs and assign someone to act on meaningful security alerts.",
+      "answer_example": "Admin sign-ins and cloud changes are logged; suspicious login alerts go to the on-call owner.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Important suspicious events are visible and assigned for action. Who will address it?",
+        "high": "How do you know alerts are reaching someone and being acted on?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Enable useful security logs and route actionable alerts to a named responder; test delivery and response.",
+        "owner_role": "IT / security owner",
+        "effort": "M",
+        "dependencies": [
+          "Critical systems and incident contacts"
+        ],
+        "expected_outcome": "Important suspicious events are visible and assigned for action.",
+        "verification": "Logging coverage, retention settings and an alert-response test.",
+        "priority": "Medium",
+        "target_days": 60
+      }
+    },
+    {
+      "id": "T09",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Are publicly exposed systems/dependencies scanned and findings prioritized and remediated?",
+      "explanation": "Find exposed systems and vulnerable dependencies, then remediate according to risk.",
+      "answer_example": "Our pipeline checks dependencies weekly; internet-facing findings get assigned deadlines.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Exposed vulnerabilities are found and treated according to risk. Who will address it?",
+        "high": "Which unresolved public-facing finding has the highest business impact?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Scan internet-facing systems and software dependencies; prioritize findings by exposure and track remediation.",
+        "owner_role": "Engineering / IT lead",
+        "effort": "M",
+        "dependencies": [
+          "Public asset and dependency inventory"
+        ],
+        "expected_outcome": "Exposed vulnerabilities are found and treated according to risk.",
+        "verification": "Recent scan report and linked remediation/exception records.",
+        "priority": "High",
+        "target_days": 30
+      }
+    },
+    {
+      "id": "T10",
+      "domain": "Technology",
+      "modes": [
+        "full"
+      ],
+      "text": "Are secrets kept in managed stores rather than source code, personal chats or shared documents?",
+      "explanation": "Use managed secret stores and rotate exposed secrets; avoid code, chat and shared files.",
+      "answer_example": "Production credentials are in a secret manager with scoped access and rotation procedures.",
+      "follow_ups": {
+        "low": "What is missing to achieve this outcome: Production secrets are controlled and exposed credentials can be rotated. Who will address it?",
+        "high": "What happens if a developer accidentally commits a secret?",
+        "unknown": "Who can check this control, and which evidence would resolve whether it is in place?",
+        "na": "Which part of your business makes this control inapplicable, and when should that decision be reviewed?"
+      },
+      "remediation": {
+        "action": "Move secrets into a managed store, scope access and define rotation and accidental-exposure response.",
+        "owner_role": "Engineering lead",
+        "effort": "M",
+        "dependencies": [
+          "Secret inventory and application owners"
+        ],
+        "expected_outcome": "Production secrets are controlled and exposed credentials can be rotated.",
+        "verification": "Secret-storage/access review and a rotation exercise record.",
+        "priority": "High",
+        "target_days": 30
+      }
+    }
+  ]
+}
