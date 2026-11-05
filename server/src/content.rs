@@ -79,7 +79,18 @@ pub fn latest() -> &'static Bank {
     by_version("1.0.0").expect("Bundled bank must be available")
 }
 pub fn by_version(version: &str) -> AppResult<&'static Bank> {
-    match version {"1.0.0"=>Ok(V1.get_or_init(||{let b:Bank=serde_json::from_str(V1_JSON).expect("Invalid bundled bank");validate(&b).expect("Invalid bank configuration");b})),_=>Err(AppError::Validation(format!("Unsupported question bank version: {version}. This assessment cannot be silently rescored.")))}
+    match version {"1.0.0"=>Ok(V1.get_or_init(||{parse_bank("1.0.0",V1_JSON).expect("Invalid bundled bank configuration")})),_=>Err(AppError::Validation(format!("Unsupported question bank version: {version}. This assessment cannot be silently rescored.")))}
+}
+pub fn parse_bank(expected_version: &str, raw: &str) -> Result<Bank, String> {
+    let bank: Bank = serde_json::from_str(raw).map_err(|e| e.to_string())?;
+    if bank.version != expected_version {
+        return Err(format!(
+            "Registered bank {expected_version} has mismatched version {}",
+            bank.version
+        ));
+    }
+    validate(&bank)?;
+    Ok(bank)
 }
 pub fn validate(b: &Bank) -> Result<(), String> {
     let mut ids = std::collections::BTreeSet::new();

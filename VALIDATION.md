@@ -1,6 +1,6 @@
 # v0.5.0 verification — 2026-11-05
 
-- 13 Rust tests passed, including 22 score/coverage/maturity/priority fixtures captured from the previous v0.4.0 executable, frozen question wording/guidance, legacy-record migration, single-call saves, server validation, completion/handoff, evidence-confidence separation and backup/restore.
+- 14 Rust tests passed, including 22 score/coverage/maturity/priority fixtures captured from the previous v0.4.0 executable, registered-version validation, frozen question wording/guidance, legacy-record migration, single-call saves, server validation, completion/handoff, evidence-confidence separation and backup/restore.
 - A real HTTP concurrency test sends two writes with the same revision: exactly one is applied, the other returns revision_conflict, and storage contains one update.
 - Locked debug and optimized release builds passed.
 - Existing live HTTP smoke test passed with the new tool count and backward-compatible revision omission, including concurrent saves and process restart file handling.

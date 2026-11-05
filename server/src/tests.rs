@@ -250,3 +250,13 @@ fn legacy_bank_question_wording_and_guidance_are_frozen() {
         }
     }
 }
+
+#[test]
+fn registered_bank_version_must_match_its_content() {
+    let raw = include_str!("../../assessment/banks/1.0.0.json");
+    assert!(content::parse_bank("2.0.0", raw).is_err());
+    assert_eq!(
+        content::by_version(LEGACY_BANK_VERSION).unwrap().version,
+        LEGACY_BANK_VERSION
+    );
+}
