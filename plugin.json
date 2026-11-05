@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "enisa-sme-assessment",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Independent ENISA-informed cyber maturity assessment with Rust MCP persistence and risk plans",
   "author": {
     "name": "Independent assessment toolkit"

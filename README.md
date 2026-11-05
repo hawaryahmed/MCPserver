@@ -1,4 +1,4 @@
-# SME Cyber Maturity MCP — v0.5.0
+# SME Cyber Maturity MCP — v0.5.1
 
 Independent ENISA-informed self-assessment. Not an official ENISA product, score, audit or certification.
 
@@ -15,7 +15,7 @@ Independent ENISA-informed self-assessment. Not an official ENISA product, score
 | Host / port | `HOST=0.0.0.0`, `PORT=10000` |
 | Storage | `ENISA_MCP_DATA_DIR=./data` |
 | Allowed browser origin | `MCP_ALLOWED_ORIGINS=https://chatgpt.com` |
-| Health check | `/healthz` (version `0.5.0`) |
+| Health check | `/healthz` (version `0.5.1`) |
 
 Connect ChatGPT to `https://sme-cyber-maturity-mcp.onrender.com/mcp` using **No Authentication**. Merge/deploy the update and refresh the app's tools before using new actions. A manually configured Render service must independently be set to Rust / Free; repository YAML does not prove its current runtime or billing plan.
 
@@ -27,7 +27,7 @@ Open **Assessment overview**, choose scope and start. Each question includes ans
 
 Each assessment is pinned to a questionnaire version. Completion means every scoped question has an answer, including Unknown or justified NA; it does not mean every control is implemented or verified. Completed assessments reopen their report. Scores, coverage and evidence confidence are separate.
 
-**Summarize in chat** sends the selected assessment ID and saved results to ChatGPT. Completion also updates the host's model context. If a host does not support chat messages, use the ID to ask for a summary manually. No automatic messages are sent just by saving answers.
+**Summarize in chat** sends one short request naming the selected assessment ID. ChatGPT retrieves the saved report through the assessment tools. The form never calls updateModelContext: saving, completing, resuming, restoring and conflict recovery do not generate context attachments. The button is disabled after a successful request for that report revision to prevent accidental duplicate messages. No raw report JSON is inserted into a visible chat message. If a host does not support chat messages, use the ID to ask for a summary manually.
 
 Recommendations include a specific action, owner role, effort, dependencies, expected outcome and verification evidence. Priorities and target dates are unchanged from the prior method; review them against actual business risk.
 
@@ -101,7 +101,7 @@ npx playwright install chromium --only-shell
 npm test
 ```
 
-The browser test uses a sandboxed cross-origin MCP Apps bridge and the real Rust backend. It checks the workflow, one-call saves, completion context/chat handoff, backup download/restore and stale-edit recovery. This does not certify real ChatGPT behavior on every client.
+The browser test uses a sandboxed cross-origin MCP Apps bridge and the real Rust backend. It checks the workflow, one-call saves, quiet saves and explicit summary handoff, backup download/restore and stale-edit recovery. This does not certify real ChatGPT behavior on every client.
 
 `server/tests/fixtures/legacy-scoring-v0.4.0.json` contains 22 results captured from the previous executable. Tests preserve scores, coverage, maturity bands, unknown/NA handling, priorities and target dates. Existing HTTP smoke tests also remain available with `python3 tests/smoke.py`; Python is test-only.
 

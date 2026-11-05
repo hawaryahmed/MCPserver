@@ -1,9 +1,9 @@
 import { App } from '@modelcontextprotocol/ext-apps';
 import './style.css';
 
-const app = new App({name:'SME Cyber Maturity',version:'0.5.0'}, {availableDisplayModes:['inline','fullscreen']});
+const app = new App({name:'SME Cyber Maturity',version:'0.5.1'}, {availableDisplayModes:['inline','fullscreen']});
 const root=document.getElementById('root');
-const state={connected:false,busy:false,data:null,index:0,drafts:{},report:null,error:'',notice:'',org:'',mode:'quick',catalog:null,errorCode:'',backupText:'',backupFilename:'',importText:'',resumeId:''};
+const state={connected:false,busy:false,data:null,index:0,drafts:{},report:null,error:'',notice:'',org:'',mode:'quick',catalog:null,errorCode:'',backupText:'',backupFilename:'',importText:'',resumeId:'',summaryRequestedKey:''};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const scales=()=>state.data?.score_scale??state.catalog?.score_scale??[];
 function followUp(q,level){if(!level)return 'Choose a level to see the most relevant follow-up.';return q.follow_ups?.[level==='NA'?'na':level==='U'?'unknown':Number(level)<3?'low':'high']??q.follow_up}
@@ -65,7 +65,7 @@ function questionnaire(){
 function report(){
  const r=state.report;const missing=r.needs_verification?.length||0;
  return `<section class="card"><span class="badge">Assessment review</span><h2>${esc(r.organization)}</h2><p class="big">${r.overall_index_pct==null?'Provisional':esc(r.overall_index_pct)+'%'}</p><p class="small">${esc(r.status==='completed'?'Completed assessment':'Assessment in progress')} · Bank ${esc(r.bank_version)}</p><p>${r.overall_index_pct==null?'Answer more questions before an overall score can be assigned.':esc(r.plugin_defined_maturity)+' · independent scoring model'}</p>
- <div class="domains">${r.domains.map(d=>`<div><b>${esc(d.domain)}</b><p>${d.score_pct==null?'—':esc(d.score_pct)+'%'}${d.provisional?' · provisional':''}</p><small>${esc(d.coverage_pct)}% coverage</small></div>`).join('')}</div><p class="small">${missing} unknown or unanswered controls still need verification. Evidence confidence: self-reported. ${esc(r.evidence_summary?.answers_with_evidence_reference??0)} answers have references; none are independently verified by this demo.</p><button class="primary" id="summarize">Summarize in chat</button><button class="secondary" id="export">Export backup</button><button class="secondary" id="return">Return to questions</button></section>
+ <div class="domains">${r.domains.map(d=>`<div><b>${esc(d.domain)}</b><p>${d.score_pct==null?'—':esc(d.score_pct)+'%'}${d.provisional?' · provisional':''}</p><small>${esc(d.coverage_pct)}% coverage</small></div>`).join('')}</div><p class="small">${missing} unknown or unanswered controls still need verification. Evidence confidence: self-reported. ${esc(r.evidence_summary?.answers_with_evidence_reference??0)} answers have references; none are independently verified by this demo.</p><button class="primary" id="summarize" ${state.summaryRequestedKey===summaryKey()?'disabled':''}>${state.summaryRequestedKey===summaryKey()?'Summary requested':'Summarize in chat'}</button><button class="secondary" id="export">Export backup</button><button class="secondary" id="return">Return to questions</button></section>
  <section class="card"><h2>Your 30 / 60 / 90-day starting plan</h2>${r.gaps.length?r.gaps.map(g=>`<article class="gap"><span class="badge">${esc(g.target)} · ${esc(g.priority)}</span><h3>${esc(g.question_id)} · ${esc(g.question)}</h3><p>${esc(g.action)}</p><p class="small">Owner: ${esc(g.owner||g.owner_role||'To assign')} · Effort: ${esc(g.effort)}<br>Depends on: ${esc((g.dependencies||[]).join(' · '))}<br>Outcome: ${esc(g.expected_outcome)}<br>Verify: ${esc(g.verification)}</p></article>`).join(''):'<p>No low-scoring gaps were found among the numeric answers. This does not establish that all controls are effective; review unknowns and verify evidence.</p>'}<p class="fine">${esc(r.caveat)}</p></section>`;
 }
 function render(){
@@ -74,16 +74,14 @@ function render(){
  bind();
  if(state.busy) root.querySelectorAll('button,input,select,textarea').forEach(x=>x.disabled=true);
 }
-async function syncContext(){
- const d=state.data;if(!d?.assessment_id)return;
- const summary=d.handoff??{assessment_id:d.assessment_id,organization:d.organization,status:d.status,bank_version:d.bank_version,answered:d.answered,total:d.total,current_question:current()?.id};
- try{await app.updateModelContext({content:[{type:'text',text:`Saved assessment context: ${JSON.stringify(summary)}`}]})}catch{state.notice='Answers saved. Chat context could not be updated; use the assessment ID to request a summary.'}
-}
+function summaryKey(){return state.report?`${state.report.assessment_id}:${state.report.revision}`:''}
 async function summarize(){
- const r=state.report;await syncContext();
- const result=await app.sendMessage({role:'user',content:[{type:'text',text:`Please summarize my saved assessment ${r.assessment_id} (${r.organization}) and recommend next actions. Status: ${r.status}. Bank: ${r.bank_version}. Results: ${JSON.stringify({overall_index_pct:r.overall_index_pct,domains:r.domains,evidence_summary:r.evidence_summary,needs_verification:r.needs_verification,gaps:r.gaps})}`}]});
+ const r=state.report,key=summaryKey();
+ if(state.summaryRequestedKey===key)return;
+ const result=await app.sendMessage({role:'user',content:[{type:'text',text:`Summarize my assessment ${r.assessment_id} (${r.organization}) and recommend next actions.`}]});
  if(result?.isError)throw new Error('Chat summary was not accepted. Ask ChatGPT to summarize using the assessment ID shown here.');
- state.notice='Results shared with ChatGPT for a summary and next actions.';
+ state.summaryRequestedKey=key;
+ state.notice='Summary requested in chat.';
 }
 async function save(unknown=false){
  const q=current(),a=state.drafts[q.id]||{};
@@ -96,14 +94,14 @@ async function save(unknown=false){
  delete state.drafts[q.id];state.notice=`${q.id} saved.`;
  if(state.index<state.data.questions.length-1)state.index++;
  else state.report=saved.report??await tool('calculate_maturity',{assessment_id:state.data.assessment_id});
- void syncContext();
+
 }
 function bind(){
  if(el('expand'))el('expand').onclick=()=>app.requestDisplayMode({mode:'fullscreen'}).catch(()=>{state.error='Expanded view is unavailable in this host.';render()});
  if(el('org')){el('org').oninput=e=>state.org=e.target.value;el('mode').onchange=e=>state.mode=e.target.value;}
- if(el('start'))el('start').onclick=()=>act(async()=>{if(!state.org.trim())throw new Error('Enter an organization or demo name.');const created=await tool('create_assessment',{organization:state.org.trim(),mode:state.mode});receive({structuredContent:created});state.notice='Assessment started. Answer one question at a time.';void syncContext()});
+ if(el('start'))el('start').onclick=()=>act(async()=>{if(!state.org.trim())throw new Error('Enter an organization or demo name.');const created=await tool('create_assessment',{organization:state.org.trim(),mode:state.mode});receive({structuredContent:created});state.notice='Assessment started. Answer one question at a time.'});
  if(el('resume-id'))el('resume-id').oninput=e=>state.resumeId=e.target.value;
- if(el('resume'))el('resume').onclick=()=>{const id=el('resume-id').value.trim();act(async()=>{if(!id)throw new Error('Enter an assessment ID.');receive({structuredContent:await tool('get_assessment',{assessment_id:id})});void syncContext()})};
+ if(el('resume'))el('resume').onclick=()=>{const id=el('resume-id').value.trim();act(async()=>{if(!id)throw new Error('Enter an assessment ID.');receive({structuredContent:await tool('get_assessment',{assessment_id:id})})})};
  if(el('save-next'))el('save-next').onclick=()=>act(()=>save());
  if(el('score'))el('score').onchange=()=>{el('na-wrap').hidden=el('score').value!=='NA';el('na').required=el('score').value==='NA';el('follow-prompt').textContent=followUp(current(),el('score').value);capture()};
  if(el('back'))el('back').onclick=()=>{capture();state.index--;state.notice='Unsaved edits stay in this open form until you save.';render()};
@@ -114,8 +112,8 @@ function bind(){
  if(el('download'))el('download').onclick=()=>act(async()=>{const r=await app.downloadFile({contents:[{type:'resource',resource:{uri:'file:///'+state.backupFilename,mimeType:'application/json',text:state.backupText}}]});if(r?.isError)throw new Error('Download cancelled or unavailable. Copy the backup JSON instead.');});
  if(el('import-json'))el('import-json').oninput=e=>state.importText=e.target.value;
  if(el('import-file'))el('import-file').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>200000){state.error='Backup file is too large.';render();return;}state.importText=await file.text();render()};
- if(el('restore'))el('restore').onclick=()=>act(async()=>{let backup;try{backup=JSON.parse(state.importText)}catch{throw new Error('Paste valid backup JSON or choose an exported JSON file.')}receive({structuredContent:await tool('import_assessment',{backup})});state.notice='Backup restored into a new assessment ID.';state.importText='';void syncContext()});
- if(el('reload'))el('reload').onclick=()=>act(async()=>{state.data=await tool('get_assessment',{assessment_id:state.data.assessment_id});state.notice='Saved version reloaded. Your local draft is retained; review it before saving again.';void syncContext()});
+ if(el('restore'))el('restore').onclick=()=>act(async()=>{let backup;try{backup=JSON.parse(state.importText)}catch{throw new Error('Paste valid backup JSON or choose an exported JSON file.')}receive({structuredContent:await tool('import_assessment',{backup})});state.notice='Backup restored into a new assessment ID.';state.importText=''});
+ if(el('reload'))el('reload').onclick=()=>act(async()=>{state.data=await tool('get_assessment',{assessment_id:state.data.assessment_id});state.notice='Saved version reloaded. Your local draft is retained; review it before saving again.'});
  if(el('return'))el('return').onclick=()=>{state.report=null;render()};
  if(el('overview'))el('overview').onclick=()=>{capture();state.org=state.data.organization;state.notice=`Resume using assessment ID ${state.data.assessment_id}.`;state.data=null;state.report=null;render()};
 }
