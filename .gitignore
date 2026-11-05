@@ -3,4 +3,4 @@ data/
 .env
 __pycache__/
 
-web/node_modules/
+web/node_modules

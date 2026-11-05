@@ -1,0 +1,3326 @@
+[
+  {
+    "name": "quick-empty",
+    "assessment": {
+      "id": "bcb35b22-5d67-4548-a0cc-b25a036c83c9",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {}
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 0.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ]
+    }
+  },
+  {
+    "name": "quick-all-0",
+    "assessment": {
+      "id": "1b2bc856-1ed0-4822-96bd-577aa82aa690",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "0"
+        },
+        "P02": {
+          "value": "0"
+        },
+        "P03": {
+          "value": "0"
+        },
+        "P04": {
+          "value": "0"
+        },
+        "R01": {
+          "value": "0"
+        },
+        "R02": {
+          "value": "0"
+        },
+        "R03": {
+          "value": "0"
+        },
+        "R04": {
+          "value": "0"
+        },
+        "T01": {
+          "value": "0"
+        },
+        "T02": {
+          "value": "0"
+        },
+        "T03": {
+          "value": "0"
+        },
+        "T04": {
+          "value": "0"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 0.0,
+      "plugin_defined_maturity": "Initial",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-all-1",
+    "assessment": {
+      "id": "4355fdbd-518c-477f-8140-6081ec884f4b",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "1"
+        },
+        "P02": {
+          "value": "1"
+        },
+        "P03": {
+          "value": "1"
+        },
+        "P04": {
+          "value": "1"
+        },
+        "R01": {
+          "value": "1"
+        },
+        "R02": {
+          "value": "1"
+        },
+        "R03": {
+          "value": "1"
+        },
+        "R04": {
+          "value": "1"
+        },
+        "T01": {
+          "value": "1"
+        },
+        "T02": {
+          "value": "1"
+        },
+        "T03": {
+          "value": "1"
+        },
+        "T04": {
+          "value": "1"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 25.0,
+      "plugin_defined_maturity": "Developing",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-all-2",
+    "assessment": {
+      "id": "4ad9f22f-c13b-4471-8fb3-0620c5ed9786",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "2"
+        },
+        "P02": {
+          "value": "2"
+        },
+        "P03": {
+          "value": "2"
+        },
+        "P04": {
+          "value": "2"
+        },
+        "R01": {
+          "value": "2"
+        },
+        "R02": {
+          "value": "2"
+        },
+        "R03": {
+          "value": "2"
+        },
+        "R04": {
+          "value": "2"
+        },
+        "T01": {
+          "value": "2"
+        },
+        "T02": {
+          "value": "2"
+        },
+        "T03": {
+          "value": "2"
+        },
+        "T04": {
+          "value": "2"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 50.0,
+      "plugin_defined_maturity": "Managed",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-all-3",
+    "assessment": {
+      "id": "edac8f37-a1c1-43be-8bc4-2fcd4bf91800",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "3"
+        },
+        "P02": {
+          "value": "3"
+        },
+        "P03": {
+          "value": "3"
+        },
+        "P04": {
+          "value": "3"
+        },
+        "R01": {
+          "value": "3"
+        },
+        "R02": {
+          "value": "3"
+        },
+        "R03": {
+          "value": "3"
+        },
+        "R04": {
+          "value": "3"
+        },
+        "T01": {
+          "value": "3"
+        },
+        "T02": {
+          "value": "3"
+        },
+        "T03": {
+          "value": "3"
+        },
+        "T04": {
+          "value": "3"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 75.0,
+      "plugin_defined_maturity": "Improving",
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-all-4",
+    "assessment": {
+      "id": "8be3b149-7600-4309-aaef-467036484608",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "4"
+        },
+        "P02": {
+          "value": "4"
+        },
+        "P03": {
+          "value": "4"
+        },
+        "P04": {
+          "value": "4"
+        },
+        "R01": {
+          "value": "4"
+        },
+        "R02": {
+          "value": "4"
+        },
+        "R03": {
+          "value": "4"
+        },
+        "R04": {
+          "value": "4"
+        },
+        "T01": {
+          "value": "4"
+        },
+        "T02": {
+          "value": "4"
+        },
+        "T03": {
+          "value": "4"
+        },
+        "T04": {
+          "value": "4"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 4,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 100.0,
+      "plugin_defined_maturity": "Improving",
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-all-U",
+    "assessment": {
+      "id": "27908d1f-059a-4610-b1ef-17e14af2b26e",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "U"
+        },
+        "P02": {
+          "value": "U"
+        },
+        "P03": {
+          "value": "U"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "R01": {
+          "value": "U"
+        },
+        "R02": {
+          "value": "U"
+        },
+        "R03": {
+          "value": "U"
+        },
+        "R04": {
+          "value": "U"
+        },
+        "T01": {
+          "value": "U"
+        },
+        "T02": {
+          "value": "U"
+        },
+        "T03": {
+          "value": "U"
+        },
+        "T04": {
+          "value": "U"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 0.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 4
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ]
+    }
+  },
+  {
+    "name": "quick-all-NA",
+    "assessment": {
+      "id": "f90bf09b-8206-41db-82bb-81c3dc08875f",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 4,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 4,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 4,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-three-numeric-per-domain",
+    "assessment": {
+      "id": "de0c24c2-4407-4a4a-8678-933016efa57b",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "3"
+        },
+        "P02": {
+          "value": "3"
+        },
+        "P03": {
+          "value": "3"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "R01": {
+          "value": "3"
+        },
+        "R02": {
+          "value": "3"
+        },
+        "R03": {
+          "value": "3"
+        },
+        "R04": {
+          "value": "U"
+        },
+        "T01": {
+          "value": "3"
+        },
+        "T02": {
+          "value": "3"
+        },
+        "T03": {
+          "value": "3"
+        },
+        "T04": {
+          "value": "U"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 75.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 1
+        },
+        {
+          "coverage_pct": 75.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 1
+        },
+        {
+          "coverage_pct": 75.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 1
+        }
+      ],
+      "overall_index_pct": 75.0,
+      "plugin_defined_maturity": "Improving",
+      "gaps": [],
+      "unknown_ids": [
+        "P04",
+        "R04",
+        "T04"
+      ]
+    }
+  },
+  {
+    "name": "quick-two-numeric-rest-na",
+    "assessment": {
+      "id": "23675dc8-1aef-4d00-bf9b-d987f3f4146d",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "4"
+        },
+        "P02": {
+          "value": "4"
+        },
+        "P03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R01": {
+          "value": "4"
+        },
+        "R02": {
+          "value": "4"
+        },
+        "R03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T01": {
+          "value": "4"
+        },
+        "T02": {
+          "value": "4"
+        },
+        "T03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 2,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 2,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 2,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "quick-mixed",
+    "assessment": {
+      "id": "f66b7679-1a63-470e-93c7-430026c002f4",
+      "organization": "Legacy fixture",
+      "mode": "quick",
+      "answers": {
+        "P01": {
+          "value": "0"
+        },
+        "P02": {
+          "value": "2"
+        },
+        "P03": {
+          "value": "4"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "R01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R02": {
+          "value": "0"
+        },
+        "R03": {
+          "value": "2"
+        },
+        "R04": {
+          "value": "4"
+        },
+        "T01": {
+          "value": "U"
+        },
+        "T02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T03": {
+          "value": "0"
+        },
+        "T04": {
+          "value": "2"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 75.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 1
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 1,
+          "numeric": 3,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 66.7,
+          "domain": "Technology",
+          "justified_na": 1,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 1
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": [
+        "P04",
+        "T01"
+      ]
+    }
+  },
+  {
+    "name": "full-empty",
+    "assessment": {
+      "id": "91c2b6c9-cd41-43d0-9b7a-749c63495414",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {}
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 0.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10"
+      ]
+    }
+  },
+  {
+    "name": "full-all-0",
+    "assessment": {
+      "id": "1513e276-aa29-492e-9127-19f1b3295cdb",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "0"
+        },
+        "P02": {
+          "value": "0"
+        },
+        "P03": {
+          "value": "0"
+        },
+        "P04": {
+          "value": "0"
+        },
+        "P05": {
+          "value": "0"
+        },
+        "P06": {
+          "value": "0"
+        },
+        "P07": {
+          "value": "0"
+        },
+        "P08": {
+          "value": "0"
+        },
+        "P09": {
+          "value": "0"
+        },
+        "P10": {
+          "value": "0"
+        },
+        "R01": {
+          "value": "0"
+        },
+        "R02": {
+          "value": "0"
+        },
+        "R03": {
+          "value": "0"
+        },
+        "R04": {
+          "value": "0"
+        },
+        "R05": {
+          "value": "0"
+        },
+        "R06": {
+          "value": "0"
+        },
+        "R07": {
+          "value": "0"
+        },
+        "R08": {
+          "value": "0"
+        },
+        "R09": {
+          "value": "0"
+        },
+        "R10": {
+          "value": "0"
+        },
+        "T01": {
+          "value": "0"
+        },
+        "T02": {
+          "value": "0"
+        },
+        "T03": {
+          "value": "0"
+        },
+        "T04": {
+          "value": "0"
+        },
+        "T05": {
+          "value": "0"
+        },
+        "T06": {
+          "value": "0"
+        },
+        "T07": {
+          "value": "0"
+        },
+        "T08": {
+          "value": "0"
+        },
+        "T09": {
+          "value": "0"
+        },
+        "T10": {
+          "value": "0"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 0.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 0.0,
+      "plugin_defined_maturity": "Initial",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P05",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R05",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R06",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R08",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T07",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T09",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T10",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P06",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P07",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P08",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P09",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P10",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R07",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R09",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R10",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "T05",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T06",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T08",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-all-1",
+    "assessment": {
+      "id": "68b75815-2e73-4448-ab59-3232c4a9a9d8",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "1"
+        },
+        "P02": {
+          "value": "1"
+        },
+        "P03": {
+          "value": "1"
+        },
+        "P04": {
+          "value": "1"
+        },
+        "P05": {
+          "value": "1"
+        },
+        "P06": {
+          "value": "1"
+        },
+        "P07": {
+          "value": "1"
+        },
+        "P08": {
+          "value": "1"
+        },
+        "P09": {
+          "value": "1"
+        },
+        "P10": {
+          "value": "1"
+        },
+        "R01": {
+          "value": "1"
+        },
+        "R02": {
+          "value": "1"
+        },
+        "R03": {
+          "value": "1"
+        },
+        "R04": {
+          "value": "1"
+        },
+        "R05": {
+          "value": "1"
+        },
+        "R06": {
+          "value": "1"
+        },
+        "R07": {
+          "value": "1"
+        },
+        "R08": {
+          "value": "1"
+        },
+        "R09": {
+          "value": "1"
+        },
+        "R10": {
+          "value": "1"
+        },
+        "T01": {
+          "value": "1"
+        },
+        "T02": {
+          "value": "1"
+        },
+        "T03": {
+          "value": "1"
+        },
+        "T04": {
+          "value": "1"
+        },
+        "T05": {
+          "value": "1"
+        },
+        "T06": {
+          "value": "1"
+        },
+        "T07": {
+          "value": "1"
+        },
+        "T08": {
+          "value": "1"
+        },
+        "T09": {
+          "value": "1"
+        },
+        "T10": {
+          "value": "1"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 25.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 25.0,
+      "plugin_defined_maturity": "Developing",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P05",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R05",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R06",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R08",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T07",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T09",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T10",
+          "observed_score": 1,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P06",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P07",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P08",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P09",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P10",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R07",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R09",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R10",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "T05",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T06",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T08",
+          "observed_score": 1,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-all-2",
+    "assessment": {
+      "id": "c7066eef-5bf8-478b-af76-df904a81ae11",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "2"
+        },
+        "P02": {
+          "value": "2"
+        },
+        "P03": {
+          "value": "2"
+        },
+        "P04": {
+          "value": "2"
+        },
+        "P05": {
+          "value": "2"
+        },
+        "P06": {
+          "value": "2"
+        },
+        "P07": {
+          "value": "2"
+        },
+        "P08": {
+          "value": "2"
+        },
+        "P09": {
+          "value": "2"
+        },
+        "P10": {
+          "value": "2"
+        },
+        "R01": {
+          "value": "2"
+        },
+        "R02": {
+          "value": "2"
+        },
+        "R03": {
+          "value": "2"
+        },
+        "R04": {
+          "value": "2"
+        },
+        "R05": {
+          "value": "2"
+        },
+        "R06": {
+          "value": "2"
+        },
+        "R07": {
+          "value": "2"
+        },
+        "R08": {
+          "value": "2"
+        },
+        "R09": {
+          "value": "2"
+        },
+        "R10": {
+          "value": "2"
+        },
+        "T01": {
+          "value": "2"
+        },
+        "T02": {
+          "value": "2"
+        },
+        "T03": {
+          "value": "2"
+        },
+        "T04": {
+          "value": "2"
+        },
+        "T05": {
+          "value": "2"
+        },
+        "T06": {
+          "value": "2"
+        },
+        "T07": {
+          "value": "2"
+        },
+        "T08": {
+          "value": "2"
+        },
+        "T09": {
+          "value": "2"
+        },
+        "T10": {
+          "value": "2"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 50.0,
+      "plugin_defined_maturity": "Managed",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P05",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R04",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R05",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R06",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R08",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T03",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T04",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T07",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T09",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T10",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P03",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P04",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P06",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P07",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P08",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P09",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "P10",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R03",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R07",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R09",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R10",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "T05",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T06",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "T08",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        }
+      ],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-all-3",
+    "assessment": {
+      "id": "82937d99-0d4f-4ba2-958f-0ed027f4e48f",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "3"
+        },
+        "P02": {
+          "value": "3"
+        },
+        "P03": {
+          "value": "3"
+        },
+        "P04": {
+          "value": "3"
+        },
+        "P05": {
+          "value": "3"
+        },
+        "P06": {
+          "value": "3"
+        },
+        "P07": {
+          "value": "3"
+        },
+        "P08": {
+          "value": "3"
+        },
+        "P09": {
+          "value": "3"
+        },
+        "P10": {
+          "value": "3"
+        },
+        "R01": {
+          "value": "3"
+        },
+        "R02": {
+          "value": "3"
+        },
+        "R03": {
+          "value": "3"
+        },
+        "R04": {
+          "value": "3"
+        },
+        "R05": {
+          "value": "3"
+        },
+        "R06": {
+          "value": "3"
+        },
+        "R07": {
+          "value": "3"
+        },
+        "R08": {
+          "value": "3"
+        },
+        "R09": {
+          "value": "3"
+        },
+        "R10": {
+          "value": "3"
+        },
+        "T01": {
+          "value": "3"
+        },
+        "T02": {
+          "value": "3"
+        },
+        "T03": {
+          "value": "3"
+        },
+        "T04": {
+          "value": "3"
+        },
+        "T05": {
+          "value": "3"
+        },
+        "T06": {
+          "value": "3"
+        },
+        "T07": {
+          "value": "3"
+        },
+        "T08": {
+          "value": "3"
+        },
+        "T09": {
+          "value": "3"
+        },
+        "T10": {
+          "value": "3"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 75.0,
+      "plugin_defined_maturity": "Improving",
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-all-4",
+    "assessment": {
+      "id": "52a9e4f5-e4e8-402a-859c-3f5d4df546d6",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "4"
+        },
+        "P02": {
+          "value": "4"
+        },
+        "P03": {
+          "value": "4"
+        },
+        "P04": {
+          "value": "4"
+        },
+        "P05": {
+          "value": "4"
+        },
+        "P06": {
+          "value": "4"
+        },
+        "P07": {
+          "value": "4"
+        },
+        "P08": {
+          "value": "4"
+        },
+        "P09": {
+          "value": "4"
+        },
+        "P10": {
+          "value": "4"
+        },
+        "R01": {
+          "value": "4"
+        },
+        "R02": {
+          "value": "4"
+        },
+        "R03": {
+          "value": "4"
+        },
+        "R04": {
+          "value": "4"
+        },
+        "R05": {
+          "value": "4"
+        },
+        "R06": {
+          "value": "4"
+        },
+        "R07": {
+          "value": "4"
+        },
+        "R08": {
+          "value": "4"
+        },
+        "R09": {
+          "value": "4"
+        },
+        "R10": {
+          "value": "4"
+        },
+        "T01": {
+          "value": "4"
+        },
+        "T02": {
+          "value": "4"
+        },
+        "T03": {
+          "value": "4"
+        },
+        "T04": {
+          "value": "4"
+        },
+        "T05": {
+          "value": "4"
+        },
+        "T06": {
+          "value": "4"
+        },
+        "T07": {
+          "value": "4"
+        },
+        "T08": {
+          "value": "4"
+        },
+        "T09": {
+          "value": "4"
+        },
+        "T10": {
+          "value": "4"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 10,
+          "provisional": false,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": 100.0,
+      "plugin_defined_maturity": "Improving",
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-all-U",
+    "assessment": {
+      "id": "cb03e898-0899-4074-b9f9-9d0c13a961db",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "U"
+        },
+        "P02": {
+          "value": "U"
+        },
+        "P03": {
+          "value": "U"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "P05": {
+          "value": "U"
+        },
+        "P06": {
+          "value": "U"
+        },
+        "P07": {
+          "value": "U"
+        },
+        "P08": {
+          "value": "U"
+        },
+        "P09": {
+          "value": "U"
+        },
+        "P10": {
+          "value": "U"
+        },
+        "R01": {
+          "value": "U"
+        },
+        "R02": {
+          "value": "U"
+        },
+        "R03": {
+          "value": "U"
+        },
+        "R04": {
+          "value": "U"
+        },
+        "R05": {
+          "value": "U"
+        },
+        "R06": {
+          "value": "U"
+        },
+        "R07": {
+          "value": "U"
+        },
+        "R08": {
+          "value": "U"
+        },
+        "R09": {
+          "value": "U"
+        },
+        "R10": {
+          "value": "U"
+        },
+        "T01": {
+          "value": "U"
+        },
+        "T02": {
+          "value": "U"
+        },
+        "T03": {
+          "value": "U"
+        },
+        "T04": {
+          "value": "U"
+        },
+        "T05": {
+          "value": "U"
+        },
+        "T06": {
+          "value": "U"
+        },
+        "T07": {
+          "value": "U"
+        },
+        "T08": {
+          "value": "U"
+        },
+        "T09": {
+          "value": "U"
+        },
+        "T10": {
+          "value": "U"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 0.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        },
+        {
+          "coverage_pct": 0.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 10
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10"
+      ]
+    }
+  },
+  {
+    "name": "full-all-NA",
+    "assessment": {
+      "id": "eb5df696-fd6b-42ad-91ab-5c67ed9cbd96",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T01": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T02": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 10,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 10,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 10,
+          "numeric": 0,
+          "provisional": true,
+          "score_pct": null,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-three-numeric-per-domain",
+    "assessment": {
+      "id": "23668ac8-f3ca-4540-b951-e545f5025e19",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "3"
+        },
+        "P02": {
+          "value": "3"
+        },
+        "P03": {
+          "value": "3"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "P05": {
+          "value": "U"
+        },
+        "P06": {
+          "value": "U"
+        },
+        "P07": {
+          "value": "U"
+        },
+        "P08": {
+          "value": "U"
+        },
+        "P09": {
+          "value": "U"
+        },
+        "P10": {
+          "value": "U"
+        },
+        "R01": {
+          "value": "3"
+        },
+        "R02": {
+          "value": "3"
+        },
+        "R03": {
+          "value": "3"
+        },
+        "R04": {
+          "value": "U"
+        },
+        "R05": {
+          "value": "U"
+        },
+        "R06": {
+          "value": "U"
+        },
+        "R07": {
+          "value": "U"
+        },
+        "R08": {
+          "value": "U"
+        },
+        "R09": {
+          "value": "U"
+        },
+        "R10": {
+          "value": "U"
+        },
+        "T01": {
+          "value": "3"
+        },
+        "T02": {
+          "value": "3"
+        },
+        "T03": {
+          "value": "3"
+        },
+        "T04": {
+          "value": "U"
+        },
+        "T05": {
+          "value": "U"
+        },
+        "T06": {
+          "value": "U"
+        },
+        "T07": {
+          "value": "U"
+        },
+        "T08": {
+          "value": "U"
+        },
+        "T09": {
+          "value": "U"
+        },
+        "T10": {
+          "value": "U"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 30.0,
+          "domain": "People",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": true,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 7
+        },
+        {
+          "coverage_pct": 30.0,
+          "domain": "Processes",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": true,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 7
+        },
+        {
+          "coverage_pct": 30.0,
+          "domain": "Technology",
+          "justified_na": 0,
+          "numeric": 3,
+          "provisional": true,
+          "score_pct": 75.0,
+          "unknown_or_unanswered": 7
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": [
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10"
+      ]
+    }
+  },
+  {
+    "name": "full-two-numeric-rest-na",
+    "assessment": {
+      "id": "abab373f-e692-400f-8088-47ce63ce4608",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "4"
+        },
+        "P02": {
+          "value": "4"
+        },
+        "P03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R01": {
+          "value": "4"
+        },
+        "R02": {
+          "value": "4"
+        },
+        "R03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T01": {
+          "value": "4"
+        },
+        "T02": {
+          "value": "4"
+        },
+        "T03": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T04": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T06": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T07": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T08": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T09": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 100.0,
+          "domain": "People",
+          "justified_na": 8,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Processes",
+          "justified_na": 8,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        },
+        {
+          "coverage_pct": 100.0,
+          "domain": "Technology",
+          "justified_na": 8,
+          "numeric": 2,
+          "provisional": true,
+          "score_pct": 100.0,
+          "unknown_or_unanswered": 0
+        }
+      ],
+      "overall_index_pct": null,
+      "plugin_defined_maturity": null,
+      "gaps": [],
+      "unknown_ids": []
+    }
+  },
+  {
+    "name": "full-mixed",
+    "assessment": {
+      "id": "afe37c61-8bae-40c7-978e-7c8e52d79964",
+      "organization": "Legacy fixture",
+      "mode": "full",
+      "answers": {
+        "P01": {
+          "value": "0"
+        },
+        "P02": {
+          "value": "2"
+        },
+        "P03": {
+          "value": "4"
+        },
+        "P04": {
+          "value": "U"
+        },
+        "P05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "P06": {
+          "value": "0"
+        },
+        "P07": {
+          "value": "2"
+        },
+        "P08": {
+          "value": "4"
+        },
+        "P09": {
+          "value": "U"
+        },
+        "P10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R01": {
+          "value": "0"
+        },
+        "R02": {
+          "value": "2"
+        },
+        "R03": {
+          "value": "4"
+        },
+        "R04": {
+          "value": "U"
+        },
+        "R05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "R06": {
+          "value": "0"
+        },
+        "R07": {
+          "value": "2"
+        },
+        "R08": {
+          "value": "4"
+        },
+        "R09": {
+          "value": "U"
+        },
+        "R10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T01": {
+          "value": "0"
+        },
+        "T02": {
+          "value": "2"
+        },
+        "T03": {
+          "value": "4"
+        },
+        "T04": {
+          "value": "U"
+        },
+        "T05": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        },
+        "T06": {
+          "value": "0"
+        },
+        "T07": {
+          "value": "2"
+        },
+        "T08": {
+          "value": "4"
+        },
+        "T09": {
+          "value": "U"
+        },
+        "T10": {
+          "value": "NA",
+          "na_justification": "Fixture applicability reason"
+        }
+      }
+    },
+    "expected": {
+      "domains": [
+        {
+          "coverage_pct": 75.0,
+          "domain": "People",
+          "justified_na": 2,
+          "numeric": 6,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 2
+        },
+        {
+          "coverage_pct": 75.0,
+          "domain": "Processes",
+          "justified_na": 2,
+          "numeric": 6,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 2
+        },
+        {
+          "coverage_pct": 75.0,
+          "domain": "Technology",
+          "justified_na": 2,
+          "numeric": 6,
+          "provisional": false,
+          "score_pct": 50.0,
+          "unknown_or_unanswered": 2
+        }
+      ],
+      "overall_index_pct": 50.0,
+      "plugin_defined_maturity": "Managed",
+      "gaps": [
+        {
+          "question_id": "P01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "R06",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T01",
+          "observed_score": 0,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T02",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "T07",
+          "observed_score": 2,
+          "priority": "High",
+          "target": "30 days"
+        },
+        {
+          "question_id": "P06",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "T06",
+          "observed_score": 0,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "P07",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        },
+        {
+          "question_id": "R02",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "60 days"
+        },
+        {
+          "question_id": "R07",
+          "observed_score": 2,
+          "priority": "Medium",
+          "target": "90 days"
+        }
+      ],
+      "unknown_ids": [
+        "P04",
+        "P09",
+        "R04",
+        "R09",
+        "T04",
+        "T09"
+      ]
+    }
+  }
+]

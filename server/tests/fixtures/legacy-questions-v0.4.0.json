@@ -1,0 +1,272 @@
+[
+  {
+    "answer_example": "Our founder owns security; the IT provider handles changes after approval.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Name a person who owns security decisions and can approve time or budget.",
+    "follow_up": "Who approves an urgent security fix when the usual owner is away?",
+    "id": "P01",
+    "text": "Is someone explicitly accountable for cybersecurity decisions and spend?"
+  },
+  {
+    "answer_example": "New starters get phishing examples and an MFA walkthrough; contractors are not yet included.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Include employees and contractors. Look for practical onboarding, not just a policy link.",
+    "follow_up": "When was the latest starter trained, and where is completion recorded?",
+    "id": "P02",
+    "text": "Are all staff and contractors taught practical phishing/account-security basics at onboarding?"
+  },
+  {
+    "answer_example": "We use a dedicated email and chat channel monitored by the operations lead.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "People should know a clear, quick way to report suspicious activity.",
+    "follow_up": "Who monitors reports outside normal working hours?",
+    "id": "P03",
+    "text": "Can staff report suspicious messages or incidents quickly without guessing whom to contact?"
+  },
+  {
+    "answer_example": "Bank-detail changes require a callback to a known number and a second approver.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Check whether people handling money or admin access independently verify unusual requests.",
+    "follow_up": "How would you verify an urgent payment request apparently from the founder?",
+    "id": "P04",
+    "text": "Do owners of privileged/financial accounts know how to recognize and challenge suspicious requests?"
+  },
+  {
+    "answer_example": "The project owner checks accounts at contract end; SaaS access is still manual.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Remove or adjust contractor access when roles or engagements change.",
+    "follow_up": "Which accounts did the most recent departing contractor lose access to?",
+    "id": "P05",
+    "text": "Are contractor access rights reviewed when their work changes or ends?"
+  },
+  {
+    "answer_example": "Our IT agreement lists patching and backup responsibilities but not incident reporting.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Write down what your provider secures, what you secure, and how issues are escalated.",
+    "follow_up": "Who is responsible if the provider detects an account compromise?",
+    "id": "P06",
+    "text": "Are security responsibilities documented for outsourced IT or SaaS providers?"
+  },
+  {
+    "answer_example": "Leadership reviews major risks monthly and assigns a named owner for decisions.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Include security in leadership decisions about products, vendors and spending.",
+    "follow_up": "What was the most recent security decision leadership made?",
+    "id": "P07",
+    "text": "Is security discussed with company leadership when changes or purchases are proposed?"
+  },
+  {
+    "answer_example": "We rehearsed a stolen admin account scenario and logged actions to improve.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Rehearse a realistic incident so people know their roles before an emergency.",
+    "follow_up": "Which improvement from the latest exercise has been completed?",
+    "id": "P08",
+    "text": "Do teams practice an incident scenario (e.g., account compromise) at least annually?"
+  },
+  {
+    "answer_example": "Staff use approved storage and avoid customer data in personal chat or AI tools.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "People should know which data is sensitive and how to share, store and dispose of it.",
+    "follow_up": "How are staff told which data can be shared with external tools?",
+    "id": "P09",
+    "text": "Do staff understand rules for handling customer, financial and proprietary data?"
+  },
+  {
+    "answer_example": "After a phishing report, we updated onboarding and tested the new reporting steps.",
+    "domain": "People",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Use incidents and observed weaknesses to improve training, then check understanding.",
+    "follow_up": "How did you check whether the change improved staff behavior?",
+    "id": "P10",
+    "text": "Is security training adjusted after incidents, process changes, or identified weaknesses?"
+  },
+  {
+    "answer_example": "A shared inventory maps our app, identity provider and customer database to owners.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "List services that matter to the business, their systems, data and accountable owners.",
+    "follow_up": "When was the inventory last reviewed and who updates it?",
+    "id": "R01",
+    "text": "Is there an up-to-date list of critical business services, systems and data owners?"
+  },
+  {
+    "answer_example": "We review a risk register each quarter; customer-data loss and account takeover rank highest.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Rank specific risks using business impact and likelihood, and revisit them regularly.",
+    "follow_up": "What changed since the last risk review, and did priorities change?",
+    "id": "R02",
+    "text": "Is there a recurring process for ranking cyber risks by business impact and likelihood?"
+  },
+  {
+    "answer_example": "Customer contracts and privacy obligations are tracked with owners and review dates.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Track security and privacy obligations from contracts and applicable requirements.",
+    "follow_up": "Who checks a new customer contract for security commitments?",
+    "id": "R03",
+    "text": "Are key legal, privacy, contractual and customer security obligations tracked?"
+  },
+  {
+    "answer_example": "Our runbook lists the incident lead, provider contacts and account lockout steps.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Keep usable incident contacts and initial steps for containing likely incidents.",
+    "follow_up": "Could the team access the runbook if company email were unavailable?",
+    "id": "R04",
+    "text": "Is there a documented incident response contact list and initial containment process?"
+  },
+  {
+    "answer_example": "The manager approves access by ticket; offboarding includes identity, Git and SaaS accounts.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Document access approvals and reliably remove access when people leave.",
+    "follow_up": "How was the latest offboarding checked for missed accounts?",
+    "id": "R05",
+    "text": "Are access requests/approvals and offboarding consistently documented?"
+  },
+  {
+    "answer_example": "The app must recover within a day with no more than a day's data loss; the plan names an owner.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Define which services need recovery, how quickly, and how much data loss is tolerable.",
+    "follow_up": "Have recovery targets been tested against a real restore?",
+    "id": "R06",
+    "text": "Is there a backup and recovery plan with defined recovery needs for critical services?"
+  },
+  {
+    "answer_example": "We review security information and data access for critical vendors annually.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Check critical vendors before use and when their access or risk changes.",
+    "follow_up": "Which vendor failure would cause the biggest business interruption?",
+    "id": "R07",
+    "text": "Are material cloud/SaaS vendors evaluated and reassessed for security dependencies?"
+  },
+  {
+    "answer_example": "We track patches and vulnerabilities with deadlines; exceptions need founder approval.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Give findings an owner and due date; record risk acceptance rather than silently ignoring them.",
+    "follow_up": "What happens when a high-priority finding passes its deadline?",
+    "id": "R08",
+    "text": "Is there a routine to patch, remediate, or accept risks with named owners and deadlines?"
+  },
+  {
+    "answer_example": "Cloud permissions and production changes require review and a rollback plan.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Review and test security-impacting changes before deploying them and retain a record.",
+    "follow_up": "How could you trace the last production permission change?",
+    "id": "R09",
+    "text": "Are security-impacting changes reviewed, tested and logged before release?"
+  },
+  {
+    "answer_example": "A recovery exercise found a missing secret; the runbook and recovery process were corrected.",
+    "domain": "Processes",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Test recovery and incident plans, record lessons, and follow through on improvements.",
+    "follow_up": "Who verifies that exercise actions are closed?",
+    "id": "R10",
+    "text": "Are recovery and incident response plans tested, and lessons incorporated into improvements?"
+  },
+  {
+    "answer_example": "Admin accounts use security keys; other critical accounts use MFA; one vendor is an exception.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Prioritize admin, email and financial accounts. Passkeys or security keys resist phishing where supported.",
+    "follow_up": "Which critical accounts are still exceptions, and who owns fixing them?",
+    "id": "T01",
+    "text": "Is phishing-resistant MFA enabled on privileged accounts and MFA on other critical accounts wherever supported?"
+  },
+  {
+    "answer_example": "Company laptops are supported, centrally updated and monitored for protection failures.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Use supported operating systems, apply updates and check protection is functioning.",
+    "follow_up": "How do you find devices that missed updates or lost protection?",
+    "id": "T02",
+    "text": "Are endpoints and operating systems supported, protected and updated?"
+  },
+  {
+    "answer_example": "Daily backups are separate from production; a sample restore was tested last month.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "A backup is only useful if you can restore it. Include essential settings and dependencies.",
+    "follow_up": "What was restored, how long did it take, and did you verify its integrity?",
+    "id": "T03",
+    "text": "Are essential data and settings backed up, with restore tests completed?"
+  },
+  {
+    "answer_example": "Staff have unique accounts; admin access is limited and reviewed quarterly.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Use individual accounts and only the permissions people actually need.",
+    "follow_up": "Which users currently have privileged access, and why?",
+    "id": "T04",
+    "text": "Are admin privileges minimized and accounts uniquely attributable to individuals?"
+  },
+  {
+    "answer_example": "Our inventory includes approved SaaS and devices, but personal subscriptions need review.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Track cloud accounts, SaaS, devices and external services, including their owners.",
+    "follow_up": "How would you discover a tool bought outside the normal approval process?",
+    "id": "T05",
+    "text": "Is there a maintained inventory of cloud, SaaS, devices and critical external services?"
+  },
+  {
+    "answer_example": "Customer traffic uses TLS; databases and backups are encrypted with managed keys.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Check how sensitive data is protected while moving and while stored, including backups.",
+    "follow_up": "Who can access encryption keys or decrypt sensitive data?",
+    "id": "T06",
+    "text": "Are sensitive data encrypted in transit and at rest where applicable?"
+  },
+  {
+    "answer_example": "We check cloud storage, sharing and identity settings against a documented baseline.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Review critical configurations rather than assuming vendor defaults are always sufficient.",
+    "follow_up": "When did the last configuration review occur and what changed?",
+    "id": "T07",
+    "text": "Are critical cloud/SaaS configurations reviewed against secure defaults?"
+  },
+  {
+    "answer_example": "Admin sign-ins and cloud changes are logged; suspicious login alerts go to the on-call owner.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Collect useful logs and assign someone to act on meaningful security alerts.",
+    "follow_up": "How do you know alerts are reaching someone and being acted on?",
+    "id": "T08",
+    "text": "Do critical systems produce accessible security logs and actionable alerts?"
+  },
+  {
+    "answer_example": "Our pipeline checks dependencies weekly; internet-facing findings get assigned deadlines.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Find exposed systems and vulnerable dependencies, then remediate according to risk.",
+    "follow_up": "Which unresolved public-facing finding has the highest business impact?",
+    "id": "T09",
+    "text": "Are publicly exposed systems/dependencies scanned and findings prioritized and remediated?"
+  },
+  {
+    "answer_example": "Production credentials are in a secret manager with scoped access and rotation procedures.",
+    "domain": "Technology",
+    "evidence_hint": "Use a non-sensitive document name, ticket reference, review date or anonymized description. Do not paste passwords, keys or customer data.",
+    "explanation": "Use managed secret stores and rotate exposed secrets; avoid code, chat and shared files.",
+    "follow_up": "What happens if a developer accidentally commits a secret?",
+    "id": "T10",
+    "text": "Are secrets kept in managed stores rather than source code, personal chats or shared documents?"
+  }
+]

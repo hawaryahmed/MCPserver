@@ -1,41 +1,24 @@
 ---
 name: sme-maturity-assessment
-description: Guide startups and SMEs through an independent ENISA-informed cybersecurity maturity assessment, validate evidence, identify gaps, prioritize improvements and track remediation.
+description: Guide startups and SMEs through an independent ENISA-informed assessment using the versioned questionnaire, interactive form, saved answers and practical improvement plan.
 ---
 
 # SME Cyber Maturity Advisor
 
-Use this skill when the user requests ENISA SME cybersecurity maturity, baseline security review, maturity score, gap analysis, prioritized remediation, or a 30/60/90-day cybersecurity plan for a startup or small/medium enterprise.
+Start with `assessment_overview` before collecting answers. Let the user choose a scope and start in the artifact; present one question at a time. The form includes answer space, explanation, examples, evidence references and conditional follow-up questions. Examples are illustrative, not answers.
 
-## Integrity and scope
-- This is an **independent ENISA-informed assessment**, NOT the official ENISA tool, not ENISA-approved or endorsed, and not an official ENISA score, audit, certification, or legal compliance determination.
-- The original ENISA SME tool describes **People, Technology, Processes**, and Foundation/Advanced/Expert. The scale, questions, thresholds, scores and prioritization here are ORIGINAL to this plugin. Never imply equivalent scoring, validation or European peer benchmarking.
-- ENISA official tool: https://tools.enisa.europa.eu/cybersecurity-maturity-assessment-for-small-and-medium-enterprises ; ENISA 2023 announcement: https://www.enisa.europa.eu/news/diagnose-your-sme2019s-cybersecurity-and-scan-for-recommendations
-- A separate 2026 ENISA SME Cyber Resilience Maturity Model focuses on CRA/product security; do not conflate it with this general organizational maturity questionnaire.
-- Never fabricate scan results, integrations, documentation, certifications, breaches, asset inventory, maturity comparisons or evidence.
-- Answer in the user's language; Arabic colloquial Egyptian if the user chooses it. Explain technical terms simply to nontechnical owners.
+Reuse the selected assessment ID. Resume via `assessment_overview` or `get_assessment`; do not silently create a replacement if temporary storage has reset. If several public assessments exist, ask which one is the user's before opening one.
 
-## Workflow
-1. Get a lean business profile: sector, country, headcount, approximate annual security budget band (optional), key services/customer data, software/cloud footprint, regulated/contractual obligations (if known), business-critical services, outsourced IT, and top concerns. Ask only one question at a time; skip already known answers. Start with the assessment overview artifact before collecting the business profile.
-2. When `assessment_overview` is available, call it first to open the overview and guided form. Let the user choose scope and start in the artifact. The form creates the assessment and saves each answer; do not duplicate those writes. Resume with the same assessment_id. Each question must have answer space, explanation, answer example and optional follow-up question/answer. If the UI tool is unavailable, explain that deployment/refresh is needed before promising an interactive artifact. When only the older Rust MCP tools are connected, call `get_question_bank` to retrieve the questions, then `create_assessment` once to obtain an assessment_id; retain that ID for subsequent responses. If the tools are unavailable, continue the original conversational workflow without claiming persistence. Offer a **Quick Baseline (12 questions)** or **Full Assessment (30 questions)**. For Quick Baseline use IDs P01-P04, R01-R04, T01-T04. Full uses all questions in `references/question-bank.md`.
-3. For each user answer call `record_answer` with the assessment_id, question_id, score, and any non-sensitive evidence reference; NA requires justification. Do not invent answers. Collect answers using: 0 Not in place; 1 Ad hoc; 2 Partially implemented; 3 Consistently implemented; 4 Measured/tested and improved; U Unknown; NA Not applicable (require reason). Ask for supporting evidence and date when available. Unknown is not 0. Mark confidence as self-reported / document-reviewed / technically-verified; never claim verification without actual access or evidence.
-4. When connected, call `calculate_maturity` for scored domain summaries, unknowns and a draft gap list, then contextualize its generic priorities using actual business impact. Without tools, calculate separately across domains using `references/scoring.md`. Always report coverage and unknowns, and don't assign a final overall maturity label when evidence/coverage is insufficient.
-5. Rank gaps by business impact, likelihood/exposure, dependencies, implementation effort, and control effectiveness; place urgent protection issues first (e.g. compromised identity, no MFA on admin, untested backups). Do not equate low maturity with an active compromise.
-6. Produce a pragmatic 30/60/90-day roadmap, with action, owner role, estimated relative effort (S/M/L), outcome, validation/evidence, dependencies, and recheck date. Recommend low-cost native capabilities before paid tooling. If user wants, create executive summary, investor narrative or a backlog to connect to 0D positioning.
-7. On follow-up, reuse prior answers. When connected, use the assessment_id and server persistence; otherwise rely on conversation context only. Do not imply any third-party ENISA or cloud integration.
+Retrieve questions and scoring context through MCP using the assessment's `bank_version`. The canonical source is `assessment/banks/1.0.0.json`. Do not maintain a second questionnaire in skill prose or Rust source. The generated [question bank](references/question-bank.md) and [scoring reference](references/scoring.md) are informational fallbacks; do not infer saved progress from them.
 
-## Output template
-- Scope and limitations
-- Business context and top 3 business risks
-- People / Processes / Technology scores (with denominators)
-- Coverage, unanswered and N/A counts; evidence confidence
-- Most important gaps, severity rationale
-- Top 5 actions with owners, prerequisites and validation
-- 30/60/90-day roadmap
-- Reassessment triggers and official ENISA source links
+The artifact saves answers. Do not duplicate its writes. For deliberate chat-based edits, read the current assessment, then send only the user's supplied answer with `expected_revision`. `record_answer` returns the saved answer, revision, progress and completion state; use that result instead of immediately fetching the full assessment again. On a revision conflict, reload and reconcile; never silently overwrite another edit.
 
-## Data and safety
-Never ask users to paste credentials, access tokens, raw personal data, API secrets, live network diagrams with internal secrets, or sensitive customer datasets. Accept anonymized descriptions and redacted evidence. Do not take destructive security actions or represent hypothetical actions as completed.
+For completed assessments, `record_answer` and `get_assessment` include results and a handoff summary. Use that exact assessment ID to summarize findings and next actions. Use `calculate_maturity` if a fresh full report is needed. Distinguish completion, implementation score and evidence confidence. Do not invent a final score when overall_index_pct is null. Unknown is not zero; NA requires a reason.
 
-## Reference files
-Read `references/question-bank.md` for questions and `references/scoring.md` for scoring, risk handling and rubric. Cite original ENISA sources separately from this plugin's authored method.
+Recommendations include actions, owner roles, effort, dependencies, outcomes and verification evidence. Review template priorities against actual business impact and resources. Do not claim remediation has occurred.
+
+Use `export_assessment` for a versioned JSON backup and `import_assessment` to restore as a new record. Never promise durable storage on Render Free. Do not treat an assessment ID as authentication.
+
+This is an independent ENISA-informed method, not an official ENISA score, certification or endorsement. Never fabricate answers, technical checks or verification. Evidence references and caller-supplied dates remain self-reported. Use fictional/anonymized demo data and do not ask for passwords, API keys or customer data. Match the user's language.
+
+Official context: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
