@@ -20,7 +20,7 @@ const rpc=async(method,params={})=>{
 let host,view,browser;
 try{
  for(let i=0;i<100;i++){try{await rpc('ping');break}catch(e){if(i===99)throw new Error(logs);await new Promise(r=>setTimeout(r,100))}}
- const html=(await rpc('resources/read',{uri:'ui://sme-maturity/assessment-v2.html'})).contents[0].text;
+ const html=(await rpc('resources/read',{uri:'ui://sme-maturity/assessment-v3.html'})).contents[0].text;
  const overview=await rpc('tools/call',{name:'assessment_overview',arguments:{}});
  view=createServer((req,res)=>{res.setHeader('content-type','text/html');res.end(html)});
  await new Promise(r=>view.listen(0,'127.0.0.1',r));
@@ -88,13 +88,19 @@ try{
  const reportText=await f.locator('#root').innerText();assert(reportText.includes('30 / 60 / 90-day'));
  assert.equal(widgetCalls.filter(n=>n==='get_assessment').length,0,'Create/save should not re-fetch full questionnaires');
  assert.equal(widgetCalls.filter(n=>n==='record_answer').length,13);
- await page.waitForFunction(()=>window.appEvents.some(m=>m.method==='ui/update-model-context'&&JSON.stringify(m.params).includes('completed')));
+ assert.equal(await page.evaluate(()=>window.appEvents.filter(m=>m.method==='ui/update-model-context').length),0,'Answering and completion must not generate context updates');
+ assert.equal(await page.evaluate(()=>window.appEvents.filter(m=>m.method==='ui/message').length),0,'Saving must not send chat messages');
  await f.getByRole('button',{name:'Summarize in chat'}).click();
  await page.waitForFunction(()=>window.appEvents.some(m=>m.method==='ui/message'));
  const message=await page.evaluate(()=>window.appEvents.find(m=>m.method==='ui/message').params);
- assert(JSON.stringify(message).includes('75'));
+ const summaryText=message.content[0].text;
+ assert.match(summaryText,/^Summarize my assessment [0-9a-f-]+ \(Widget test <safe>\) and recommend next actions\.$/);
+ assert(summaryText.length<200);assert(!summaryText.includes('Results:'));assert(!summaryText.includes('overall_index_pct'));
+ assert(await f.getByRole('button',{name:'Summary requested',exact:true}).isDisabled());
+ assert.equal(await page.evaluate(()=>window.appEvents.filter(m=>m.method==='ui/message').length),1);
  await f.getByRole('button',{name:'Export backup',exact:true}).click();
  const backup=JSON.parse(await f.getByLabel('Backup contents').inputValue());
+ assert(summaryText.includes(backup.assessment.id));
  assert.equal(backup.assessment.bank_version,'1.0.0');assert.equal(backup.assessment.revision,13);
  await f.getByRole('button',{name:'Download JSON'}).click();
  await page.waitForFunction(()=>window.appEvents.some(m=>m.method==='ui/download-file'));
@@ -129,9 +135,11 @@ try{
  assert((await f.locator('#root').innerText()).includes('Effort: S'));
  const loaded=(await rpc('tools/call',{name:'get_assessment',arguments:{assessment_id:restoredId}})).structuredContent;
  assert.equal(loaded.answers.P01.answer_text,'My retained draft');
+ assert.equal(await page.evaluate(()=>window.appEvents.filter(m=>m.method==='ui/update-model-context').length),0,'Resume, restore and conflict reload must stay quiet too');
+ assert.equal(await page.evaluate(()=>window.appEvents.filter(m=>m.method==='ui/message').length),1,'Only the explicit summary button sends one message');
  assert.equal(errors.length,0,errors.join('\n'));
  const overflow=await f.locator('body').evaluate(x=>x.scrollWidth>innerWidth);assert.equal(overflow,false,'Mobile layout overflow');
- console.log('PASS: MCP resource + SDK bridge, overview, create, one-question form, explanations/examples, NA validation, follow-up save, back/edit, completion score, resume, single-call saves, completion chat handoff, backup download/restore, stale-edit recovery, mobile layout, no script errors.');
+ console.log('PASS: MCP resource + SDK bridge, overview, create, one-question form, explanations/examples, NA validation, follow-up save, back/edit, completion score, resume, single-call saves, quiet saves and short explicit summary handoff, backup download/restore, stale-edit recovery, mobile layout, no script errors.');
 } finally {
  await browser?.close();await new Promise(r=>host?host.close(r):r());await new Promise(r=>view?view.close(r):r());
  child.kill('SIGTERM');await new Promise(r=>child.exitCode!==null?r():child.once('exit',r));await rm(temp,{recursive:true,force:true});

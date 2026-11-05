@@ -3,7 +3,7 @@ use crate::{
     model::{AppError, AppResult, Mode},
 };
 use serde_json::{json, Value};
-pub const URI: &str = "ui://sme-maturity/assessment-v2.html";
+pub const URI: &str = "ui://sme-maturity/assessment-v3.html";
 pub const HTML: &str = include_str!("../../web/dist/assessment.html");
 pub const DEMO_NOTICE:&str="Public demo: everyone can access saved assessments. Use fictional data. Render Free storage is temporary.";
 pub fn overview(b: &Bank) -> Value {

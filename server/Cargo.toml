@@ -1,6 +1,6 @@
 [package]
 name = "enisa-sme-mcp"
-version = "0.5.0"
+version = "0.5.1"
 edition = "2021"
 description = "Independent ENISA-informed SME cybersecurity maturity assessment MCP server"
 license = "MIT"
