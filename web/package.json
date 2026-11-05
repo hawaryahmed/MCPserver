@@ -1,0 +1,21 @@
+{
+  "name": "sme-assessment-widget",
+  "version": "1.0.0",
+  "description": "Browser form bundled into the native Rust MCP server",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test-widget.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "2.0.4",
+    "esbuild": "0.28.2"
+  },
+  "devDependencies": {
+    "playwright": "1.51.1"
+  },
+  "private": true
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dev-6aebe0648d488191ab4c9820ce5ee7f5",
+  "version": "1.1.0",
+  "description": "sme-cyber-maturity",
+  "author": {
+    "name": "App developer"
+  },
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "interface": {
+        "capabilities": [],
+        "category": "Other",
+        "defaultPrompt": null,
+        "developerName": "App developer",
+        "displayName": "sme-cyber-maturity",
+        "longDescription": "sme-cyber-maturity",
+        "shortDescription": "sme-cyber-maturity"
+      }
+    }
+  }
+}

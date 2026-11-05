@@ -1,13 +1,10 @@
-# v0.3.1 verification — 2026-11-05
+# v0.4.0 verification — 2026-11-05
 
-- Five Rust unit tests passed for the anonymous demo changes.
-- Locked debug build passed.
-- Live local HTTP smoke test passed without an Authorization header or MCP_API_KEY: initialization, all six noauth tool declarations, concurrent answer saves, scoring, listing and deletion, notification 202, protocol/Origin checks, and process restart file handling.
-- Render YAML parses, selects plan free, and declares no disk, database or API key.
-- Docker build and deployment checks run in GitHub Actions. Live Render configuration and billing require checking the service dashboard; changing YAML alone does not confirm the existing service plan changed.
-- No claim that the deployed service has updated until its health response reports 0.3.1.
-
-## Native Rust runtime update
-
-- Render config uses runtime rust and plan free, with explicit locked release build and direct binary start commands. Data uses writable relative ./data, with no persistent disk.
-- CI tests the release binary using the same entry point; Docker build steps and Docker deployment files removed.
+- Eleven Rust unit tests passed, including 30 question-specific guides, overview-before-creation, UI resource registration, old-answer compatibility, new answer fields, and read/write action metadata.
+- Locked debug build and live anonymous HTTP smoke test passed, including concurrency and restart file handling.
+- Headless Chromium test passed through a sandboxed cross-origin MCP Apps host bridge with the actual bundled widget and Rust backend: overview, creation, single-question form, explanations/examples, NA validation, follow-up save, Back/edit, completion score, resume, mobile layout and no JavaScript errors.
+- Mobile question layout visually inspected. Browser testing caught and fixed native form submission restrictions in sandboxed app frames; Save & Next now uses the tool bridge without an HTML form submission.
+- Production remains native Rust on Render Free; the UI is prebundled HTML/CSS/JavaScript embedded into the executable. Node tooling is development/CI-only.
+- Connected plugin updated separately with three skills; existing App binding and presentation preserved. Repository source includes the same package for review.
+- Real ChatGPT iframe behavior after deployment, mobile-specific host behavior, and Render's live deployment remain unverified until the PR is merged/deployed and the connection is refreshed.
+- Render Free storage remains ephemeral and public. No OAuth, tenant isolation or durable storage was added.

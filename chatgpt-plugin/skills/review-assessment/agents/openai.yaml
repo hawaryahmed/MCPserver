@@ -1,0 +1,5 @@
+interface:
+  display_name: Results and 90-day plan
+  short_description: Use when the user asks to review assessment results, maturity
+    coverage, gaps, or a 30/60/90-day impr
+  default_prompt: Review my results and build a practical 90-day plan.
