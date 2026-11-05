@@ -1,12 +1,8 @@
-# Validation — 2026-11-05
+# v0.3.1 verification — 2026-11-05
 
-- Rust 1.99.1: `cargo test` passed all 5 unit tests.
-- Locked debug and optimized release builds passed.
-- Live HTTP smoke test passed: bearer authentication, rejection of unexpected Origin, GET 405, unsupported protocol rejection, initialize negotiation, notification 202, question retrieval, assessment creation, 12 concurrent answer writes without lost updates, 75% score, listing, deletion, and persistence across process restart.
-- Render YAML parsed and checked for matching persistent mount/data paths and generated API key. This is a local syntax/configuration check, not Render's server-side Blueprint validation.
-- Dependency versions frozen in Cargo.lock.
-- Docker engine unavailable here: image build/run not performed. Included GitHub Actions workflow builds the image.
-- No Render deployment, remote HTTPS test, account connection, or existing ChatGPT plugin update performed.
-- No OAuth implementation; compatible clients must support a private bearer header. No claim of full MCP conformance certification or multi-tenant readiness.
-
-Run the included smoke test again after Render deployment. It creates and removes its own assessment and does not modify other assessments.
+- Five Rust unit tests passed for the anonymous demo changes.
+- Locked debug build passed.
+- Live local HTTP smoke test passed without an Authorization header or MCP_API_KEY: initialization, all six noauth tool declarations, concurrent answer saves, scoring, listing and deletion, notification 202, protocol/Origin checks, and process restart file handling.
+- Render YAML parses, selects plan free, and declares no disk, database or API key.
+- Docker build and deployment checks run in GitHub Actions. Live Render configuration and billing require checking the service dashboard; changing YAML alone does not confirm the existing service plan changed.
+- No claim that the deployed service has updated until its health response reports 0.3.1.

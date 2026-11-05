@@ -1,14 +1,12 @@
+# Free web service: $0/month, 0.1 CPU, 512 MB RAM.
+# Demo records are ephemeral. No paid disk or database is provisioned.
 services:
   - type: web
     name: sme-cyber-maturity-mcp
     runtime: docker
-    plan: starter
+    plan: free
     dockerfilePath: ./Dockerfile
     healthCheckPath: /healthz
-    disk:
-      name: assessment-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: HOST
         value: 0.0.0.0
@@ -16,5 +14,5 @@ services:
         value: 10000
       - key: ENISA_MCP_DATA_DIR
         value: /var/data
-      - key: MCP_API_KEY
-        generateValue: true
+      - key: MCP_ALLOWED_ORIGINS
+        value: https://chatgpt.com

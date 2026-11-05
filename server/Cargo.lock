@@ -80,12 +80,11 @@ checksum = "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600"
 
 [[package]]
 name = "enisa-sme-mcp"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "axum",
  "serde",
  "serde_json",
- "subtle",
  "tokio",
  "tower",
  "uuid",
@@ -433,12 +432,6 @@ dependencies = [
  "libc",
  "windows-sys",
 ]
-
-[[package]]
-name = "subtle"
-version = "2.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "syn"

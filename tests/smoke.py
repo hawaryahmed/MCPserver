@@ -12,8 +12,7 @@ import urllib.request
 from pathlib import Path
 
 remote = len(sys.argv) > 1
-token = os.environ.get('MCP_API_KEY') if remote else 'test-only-' + 'x' * 40
-assert token, 'Set MCP_API_KEY for remote checks'
+
 root = Path(__file__).resolve().parents[1]
 process = None
 directory = tempfile.TemporaryDirectory()
@@ -27,7 +26,7 @@ else:
 
 def start():
     global process
-    process = subprocess.Popen([str(root / 'server/target/debug/enisa-sme-mcp')], env={**os.environ, 'HOST': '127.0.0.1', 'PORT': str(port), 'MCP_API_KEY': token, 'ENISA_MCP_DATA_DIR': directory.name}, stdout=subprocess.DEVNULL)
+    process = subprocess.Popen([str(root / 'server/target/debug/enisa-sme-mcp')], env={**os.environ, 'HOST': '127.0.0.1', 'PORT': str(port), 'ENISA_MCP_DATA_DIR': directory.name}, stdout=subprocess.DEVNULL)
     for _ in range(100):
         try:
             urllib.request.urlopen(base + '/healthz', timeout=1).close()
@@ -38,10 +37,8 @@ def start():
             time.sleep(0.1)
     raise RuntimeError('Startup timed out')
 
-def request(body=None, *, method='POST', auth=True, extra=None):
+def request(body=None, *, method='POST', extra=None):
     headers = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-11-25'}
-    if auth:
-        headers['Authorization'] = 'Bearer ' + token
     headers.update(extra or {})
     req = urllib.request.Request(base + '/mcp', data=None if body is None else json.dumps(body).encode(), headers=headers, method=method)
     try:
@@ -61,13 +58,16 @@ assessment_id = None
 try:
     if not remote:
         start()
-    assert request(method='GET', auth=False)[0] == 401
+    assert request(method='GET')[0] == 405
     assert request(method='GET', extra={'Origin': 'https://evil.invalid'})[0] == 403
     assert request(method='GET')[0] == 405
     assert request({'jsonrpc': '2.0', 'id': 1, 'method': 'ping'}, extra={'MCP-Protocol-Version': 'unsupported'})[0] == 400
     status, response = request({'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {'protocolVersion': '2025-11-25', 'capabilities': {}, 'clientInfo': {'name': 'smoke', 'version': '1'}}})
     assert status == 200 and response['result']['protocolVersion'] == '2025-11-25'
     assert request({'jsonrpc': '2.0', 'method': 'notifications/initialized'}) == (202, None)
+    status, listed = request({'jsonrpc':'2.0', 'id':2, 'method':'tools/list'})
+    assert status == 200 and len(listed['result']['tools']) == 6
+    assert all(t['securitySchemes'] == [{'type':'noauth'}] for t in listed['result']['tools'])
     assert len(call('get_question_bank', mode='quick')['questions']) == 12
     assessment_id = call('create_assessment', organization='Automated smoke test', mode='quick')['assessment_id']
     questions = call('get_question_bank', mode='quick')['questions']
@@ -85,7 +85,7 @@ try:
     call('delete_assessment', assessment_id=assessment_id)
     assert not any(a['assessment_id'] == assessment_id for a in call('list_assessments')['assessments'])
     assessment_id = None
-    print('PASS: auth, Origin, protocol, initialization, notifications, question bank, concurrent answers, scoring, listing, deletion' + (', restart persistence' if not remote else ''))
+    print('PASS: anonymous access, Origin, protocol, initialization, notifications, question bank, concurrent answers, scoring, listing, deletion' + (', restart persistence' if not remote else ''))
 finally:
     if assessment_id:
         try:

@@ -1,31 +1,22 @@
 use axum::{body::Bytes, extract::{DefaultBodyLimit, State}, http::{HeaderMap, StatusCode}, response::{IntoResponse, Response}, routing::get, Json, Router};
 use serde_json::{json, Value};
 use std::{env, sync::Arc};
-use subtle::ConstantTimeEq;
 use tokio::sync::Mutex;
 
 #[derive(Clone)]
-struct App { token: Arc<String>, origins: Arc<Vec<String>>, gate: Arc<Mutex<()>> }
+struct App { origins: Arc<Vec<String>>, gate: Arc<Mutex<()>> }
 
 fn check(app: &App, headers: &HeaderMap) -> Result<(), StatusCode> {
     if let Some(origin) = headers.get("origin") {
         let origin = origin.to_str().map_err(|_| StatusCode::FORBIDDEN)?;
         if !app.origins.iter().any(|x| x == origin) { return Err(StatusCode::FORBIDDEN); }
     }
-    let supplied = headers.get("authorization").and_then(|h| h.to_str().ok()).and_then(|s| s.strip_prefix("Bearer ")).unwrap_or("");
-    if !bool::from(supplied.as_bytes().ct_eq(app.token.as_bytes())) { return Err(StatusCode::UNAUTHORIZED); }
     if let Some(version) = headers.get("mcp-protocol-version") {
         if !version.to_str().ok().is_some_and(|v| super::SUPPORTED_VERSIONS.contains(&v)) { return Err(StatusCode::BAD_REQUEST); }
     }
     Ok(())
 }
-fn rejected(status: StatusCode) -> Response {
-    let mut response = status.into_response();
-    if status == StatusCode::UNAUTHORIZED {
-        response.headers_mut().insert("www-authenticate", "Bearer realm=\"sme-maturity\"".parse().unwrap());
-    }
-    response
-}
+fn rejected(status: StatusCode) -> Response { status.into_response() }
 async fn no_stream(State(app): State<App>, headers: HeaderMap) -> Response {
     if let Err(s) = check(&app, &headers) { return rejected(s); }
     let mut response = StatusCode::METHOD_NOT_ALLOWED.into_response();
@@ -79,14 +70,12 @@ async fn post(State(app): State<App>, headers: HeaderMap, bytes: Bytes) -> Respo
 }
 fn router(app: App) -> Router {
     Router::new()
-        .route("/healthz", get(|| async { Json(json!({"status":"ok","version":"0.3.0"})) }))
+        .route("/healthz", get(|| async { Json(json!({"status":"ok","version":"0.3.1"})) }))
         .route("/mcp", get(no_stream).post(post).delete(no_stream))
         .layer(DefaultBodyLimit::max(256 * 1024))
         .with_state(app)
 }
 pub async fn serve() {
-    let token = env::var("MCP_API_KEY").expect("MCP_API_KEY must be set");
-    assert!(token.len() >= 32 && token.is_ascii() && !token.bytes().any(|b| b.is_ascii_whitespace()), "MCP_API_KEY must contain at least 32 non-whitespace ASCII characters");
     let origins = env::var("MCP_ALLOWED_ORIGINS").unwrap_or_default().split(',').map(str::trim).filter(|s| !s.is_empty()).map(String::from).collect();
     std::fs::create_dir_all(super::datastore()).expect("Cannot create data directory");
     let probe = super::datastore().join(format!(".startup-{}", uuid::Uuid::new_v4()));
@@ -95,8 +84,8 @@ pub async fn serve() {
     let port = env::var("PORT").unwrap_or_else(|_| "10000".into()).parse::<u16>().expect("Invalid PORT");
     let host = env::var("HOST").unwrap_or_else(|_| "127.0.0.1".into());
     let listener = tokio::net::TcpListener::bind(format!("{host}:{port}")).await.expect("Cannot bind HTTP listener");
-    eprintln!("SME MCP listening on {host}:{port}; stateless HTTP, private shared workspace");
-    axum::serve(listener, router(App { token: Arc::new(token), origins: Arc::new(origins), gate: Arc::new(Mutex::new(())) }))
+    eprintln!("SME MCP listening on {host}:{port}; stateless HTTP, PUBLIC DEMO: anonymous shared workspace");
+    axum::serve(listener, router(App { origins: Arc::new(origins), gate: Arc::new(Mutex::new(())) }))
         .with_graceful_shutdown(async {
             #[cfg(unix)]
             { let mut term = tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate()).unwrap(); tokio::select! { _ = tokio::signal::ctrl_c() => {}, _ = term.recv() => {} } }
@@ -110,10 +99,10 @@ mod tests {
     use super::*;
     use axum::{body::Body, http::Request};
     use tower::ServiceExt;
-    fn app() -> App { App { token: Arc::new("x".repeat(32)), origins: Arc::new(vec!["https://example.com".into()]), gate: Arc::new(Mutex::new(())) } }
+    fn app() -> App { App { origins: Arc::new(vec!["https://example.com".into()]), gate: Arc::new(Mutex::new(())) } }
     #[tokio::test]
-    async fn auth_and_origin() {
-        for (auth, origin, expected) in [(false, None, 401), (true, Some("https://evil.example"), 403), (true, None, 405)] {
+    async fn anonymous_access_and_origin() {
+        for (auth, origin, expected) in [(false, None, 405), (true, Some("https://evil.example"), 403), (true, None, 405)] {
             let mut req = Request::builder().uri("/mcp");
             if auth { req = req.header("authorization", format!("Bearer {}", "x".repeat(32))); }
             if let Some(o) = origin { req = req.header("origin", o); }
