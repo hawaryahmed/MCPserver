@@ -26,7 +26,7 @@ else:
 
 def start():
     global process
-    process = subprocess.Popen([str(root / 'server/target/debug/enisa-sme-mcp')], env={**os.environ, 'HOST': '127.0.0.1', 'PORT': str(port), 'ENISA_MCP_DATA_DIR': directory.name}, stdout=subprocess.DEVNULL)
+    process = subprocess.Popen([str(root / os.environ.get('MCP_TEST_BINARY', 'server/target/debug/enisa-sme-mcp'))], env={**os.environ, 'HOST': '127.0.0.1', 'PORT': str(port), 'ENISA_MCP_DATA_DIR': directory.name}, stdout=subprocess.DEVNULL)
     for _ in range(100):
         try:
             urllib.request.urlopen(base + '/healthz', timeout=1).close()

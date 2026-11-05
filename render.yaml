@@ -3,9 +3,10 @@
 services:
   - type: web
     name: sme-cyber-maturity-mcp
-    runtime: docker
+    runtime: rust
     plan: free
-    dockerfilePath: ./Dockerfile
+    buildCommand: cargo build --release --locked --manifest-path server/Cargo.toml
+    startCommand: ./server/target/release/enisa-sme-mcp
     healthCheckPath: /healthz
     envVars:
       - key: HOST
@@ -13,6 +14,6 @@ services:
       - key: PORT
         value: 10000
       - key: ENISA_MCP_DATA_DIR
-        value: /var/data
+        value: ./data
       - key: MCP_ALLOWED_ORIGINS
         value: https://chatgpt.com

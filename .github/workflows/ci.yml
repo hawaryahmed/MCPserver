@@ -9,4 +9,7 @@ jobs:
       - run: cargo test --locked --manifest-path server/Cargo.toml
       - run: cargo build --locked --manifest-path server/Cargo.toml
       - run: python3 tests/smoke.py
-      - run: docker build -t sme-mcp:test .
+      - run: cargo build --release --locked --manifest-path server/Cargo.toml
+      - run: python3 tests/smoke.py
+        env:
+          MCP_TEST_BINARY: server/target/release/enisa-sme-mcp
