@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: sme-cyber-maturity-mcp
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    disk:
+      name: assessment-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: ENISA_MCP_DATA_DIR
+        value: /var/data
+      - key: MCP_API_KEY
+        generateValue: true

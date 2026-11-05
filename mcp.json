@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "enisa-sme-local": {
+      "type": "stdio",
+      "command": "${PLUGIN_ROOT}/server/target/release/enisa-sme-mcp",
+      "cwd": "${PLUGIN_ROOT}",
+      "env": {
+        "ENISA_MCP_DATA_DIR": "${PLUGIN_ROOT}/data"
+      },
+      "args": [
+        "--stdio"
+      ]
+    }
+  }
+}
