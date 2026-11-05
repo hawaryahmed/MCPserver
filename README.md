@@ -1,68 +1,73 @@
-# SME Cyber Maturity MCP — Render edition v0.3.0
+# SME Cyber Maturity MCP — public demo v0.3.1
 
 Independent ENISA-informed assessment engine. Not an official ENISA product or grading system.
-Rust + Axum, stateless Streamable HTTP with JSON responses, plus optional stdio.
 
-## Deploy to Render
+## Render Free configuration
 
-1. Extract this directory. Upload **its contents** to the root of a new private GitHub repository. Include `.github`, `Dockerfile`, `render.yaml`, `server/Cargo.lock`, and all source files. Do not upload the ZIP itself.
-2. In Render, choose **New → Blueprint**, connect that repository and select `render.yaml`.
-3. Review the paid Starter web service and 1 GB persistent disk, then deploy. This package has not authorized or created a Render purchase for you.
-4. After deployment, open the service's Environment settings. Copy the generated `MCP_API_KEY` privately into your MCP client's secret configuration.
-5. Check `https://YOUR-SERVICE.onrender.com/healthz`; it should return status `ok`.
-6. Your MCP URL is `https://YOUR-SERVICE.onrender.com/mcp`. Send `Authorization: Bearer <MCP_API_KEY>` on every MCP request. Never place the key in the URL.
-7. Run `python3 tests/smoke.py https://YOUR-SERVICE.onrender.com` with `MCP_API_KEY` set locally. It creates and deletes its own test assessment.
+`render.yaml` provisions one native Rust web service with `plan: free`: **$0/month base compute, 0.1 CPU, 512 MB RAM**. CPU and RAM come from the plan; do not add unsupported CPU/RAM YAML fields. No persistent disk, database, or other paid resource is declared. Render bandwidth/build usage limits still apply.
 
-Render sets up HTTPS. `/healthz` is public and exposes no assessments. `/mcp` requires the token, including GET and DELETE. The disk is required: filesystem changes outside it are ephemeral. Render disks require paid services and constrain deployment to one instance. Review current pricing in Render before deploying.
+Assessment files use the ephemeral `./data` directory. Records are lost on restart, redeploy, or idle spin-down. Free services spin down after 15 minutes of inactivity and may take about a minute to wake up. Open `/healthz` and wait before connecting ChatGPT after an idle period.
 
-If startup says storage is not writable, check ownership of `/var/data` for UID/GID 10001 in the Render shell. Do not remove the persistent disk to fix this: that would remove the durability guarantee.
+## Update your existing deployment
 
-## Client connection
+1. Merge this change and deploy the latest `main` commit in Render.
+2. Use a native **Rust** Web Service with Instance Type **Free**, keeping Root Directory blank. The old Docker service may need to be replaced with a new Rust service; changing repository YAML alone does not change the runtime of an existing manually configured service. A new service may receive a different URL. Update your ChatGPT connection if it does.
 
-Use a client that supports Streamable HTTP plus a custom bearer Authorization header. Configure the URL and secret through that client's documented settings; JSON config formats differ among clients.
+   Build Command: `cargo build --release --locked --manifest-path server/Cargo.toml`
 
-**This is private shared-key authentication, not an OAuth implementation.** It does not supply OAuth discovery, registration, authorization or token endpoints. It is not a promise of automatic compatibility with ChatGPT's connector authentication flow. The existing ChatGPT plugin has not been modified or connected. For a host requiring OAuth, place this behind a compatible OAuth resource gateway and validate resource-bound tokens there, or implement OAuth before connecting. Do not turn off authentication to work around this.
+   Start Command: `./server/target/release/enisa-sme-mcp`
 
-All token holders share the same assessments and can list, modify and delete them. Deploy one instance per trusted workspace. This is not a multi-tenant SaaS backend. No frontend or evidence upload service is included; evidence fields store references only.
+   Environment: `HOST=0.0.0.0`, `PORT=10000`, `ENISA_MCP_DATA_DIR=./data`, `MCP_ALLOWED_ORIGINS=https://chatgpt.com`. The relative data directory is writable in the native runtime.
+3. If the old paid deployment has a disk, export any records you want to keep before detaching it. Free services cannot have persistent disks. Removing the disk block from YAML does not guarantee Render deletes an existing disk or stops its charges. Check the Render dashboard and remove the old disk yourself after backup.
+4. Remove the old `MCP_API_KEY` environment variable if desired. The demo ignores it and never requires a key.
+5. Set `MCP_ALLOWED_ORIGINS=https://chatgpt.com` (included in the Blueprint). Requests without an Origin header are accepted; unexpected Origin headers remain blocked.
+6. Verify `/healthz` returns version `0.3.1`. Until then, the older authenticated version may still be running.
 
-## Transport and tools
+## Connect through ChatGPT
 
-- POST `/mcp`: JSON-RPC requests; notifications receive empty HTTP 202.
-- Supported MCP revisions: `2025-03-26`, `2025-06-18`, `2025-11-25`. Initialize negotiates a supported version.
+Server URL: `https://sme-cyber-maturity-mcp.onrender.com/mcp`
+
+Choose **No Authentication**, not OAuth. Recreate or update the connection if ChatGPT cached the old OAuth setting. No client ID, client secret, API key, or OAuth discovery endpoint is needed. All six tools declare `securitySchemes: [{"type":"noauth"}]`.
+
+This is a public, shared demo. Anyone reaching it can list, read, change and delete assessments. Use fictitious data only. There is no user/tenant isolation, OAuth, application audit trail or rate limit. All six tools remain available for demonstration.
+
+## Endpoints
+
+- GET `/healthz`: public status and version.
+- POST `/mcp`: anonymous JSON-RPC; notifications return empty HTTP 202.
+- GET/DELETE `/mcp`: HTTP 405, because this stateless server does not provide an SSE stream or sessions. Opening `/mcp` in a browser is not a functionality test.
+- Supported MCP versions: `2025-03-26`, `2025-06-18`, `2025-11-25`.
 - Requests require Content-Type `application/json` and Accept `application/json, text/event-stream`.
-- Send `MCP-Protocol-Version` after initialization. Unsupported versions receive HTTP 400.
-- No sessions, server-initiated messages or SSE stream. Authenticated GET/DELETE return 405.
-- Origin headers are rejected unless explicitly allowlisted in comma-separated `MCP_ALLOWED_ORIGINS`. Headerless server clients are accepted with the token. No browser CORS integration is supplied.
-- 256 KiB request limit; all storage operations serialized within one process; atomic file replacement.
+- Send `MCP-Protocol-Version` after initialization. The request limit is 256 KiB.
 
-Tools: `get_question_bank`, `create_assessment`, `record_answer`, `calculate_maturity`, `list_assessments`, `delete_assessment`.
+```sh
+curl https://sme-cyber-maturity-mcp.onrender.com/mcp \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
 
-Scores and priorities are unchanged from v0.2.0. Evidence references are self-reported, not proof of verification. A 30/60/90-day plan is a template requiring business-context review.
-
-## Local development
+## Development and checks
 
 ```sh
 cargo test --locked --manifest-path server/Cargo.toml
 cargo build --locked --manifest-path server/Cargo.toml
-# Set MCP_API_KEY in your shell; use a secret manager or a random 32+ char value.
 ENISA_MCP_DATA_DIR=./data server/target/debug/enisa-sme-mcp
 ```
 
-In another shell with the same key: `python3 tests/smoke.py`.
-For legacy local MCP clients use `server/target/debug/enisa-sme-mcp --stdio` (no HTTP token required for stdio). `mcp.json` retains the local plugin configuration with this argument.
+Run `python3 tests/smoke.py` to launch a temporary local server and test the anonymous assessment workflow. For remote verification: `python3 tests/smoke.py https://sme-cyber-maturity-mcp.onrender.com`. The test creates and deletes its own assessment. Restart persistence in the local test checks file handling only; it does not imply durability on Render Free.
 
-Docker: `docker build -t sme-mcp .`, then run with `-p 127.0.0.1:10000:10000 -e MCP_API_KEY -v sme-mcp-data:/var/data`. Only one process may use the data volume. Do not run HTTP and stdio concurrently against the same directory.
+For stdio clients use `server/target/debug/enisa-sme-mcp --stdio`. No secret is needed. Deployment uses Render's native Rust runtime; Docker files are not required.
 
-## Operations
-
-Back up the mounted data directory, protect backup access, and test restoration. Rotate the token by replacing `MCP_API_KEY` in Render and updating authorized clients. Redeploys with disks may interrupt availability. Use a database and tenant authorization before horizontal scaling or customer self-service. No application audit trail, per-user authorization, quota or rate limiting is included; put limits at your gateway before broader exposure. Do not store secrets or raw sensitive evidence in answer fields.
+Tools: `get_question_bank`, `create_assessment`, `record_answer`, `calculate_maturity`, `list_assessments`, `delete_assessment`. Scoring is independent and unchanged. Evidence references are self-reported and are not proof of verification.
 
 ## References
 
-- Render Blueprint: https://render.com/docs/blueprint-spec
-- Render Docker deployment: https://render.com/docs/docker
-- Render persistent disks: https://render.com/docs/disks
-- MCP transport: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports
-- ENISA SME guidance: https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes
+- https://render.com/docs/deploy-rocket-rust
+- https://render.com/docs/compute-plans
+- https://render.com/docs/free
+- https://render.com/docs/blueprint-spec
+- https://developers.openai.com/plugins/build/auth
+- https://modelcontextprotocol.io/specification/2025-11-25/basic/transports
 
-See `VALIDATION.md` for the actual checks performed on this package.
+See `VALIDATION.md` for actual verification results.

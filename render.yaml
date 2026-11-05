@@ -1,20 +1,19 @@
+# Free web service: $0/month, 0.1 CPU, 512 MB RAM.
+# Demo records are ephemeral. No paid disk or database is provisioned.
 services:
   - type: web
     name: sme-cyber-maturity-mcp
-    runtime: docker
-    plan: starter
-    dockerfilePath: ./Dockerfile
+    runtime: rust
+    plan: free
+    buildCommand: cargo build --release --locked --manifest-path server/Cargo.toml
+    startCommand: ./server/target/release/enisa-sme-mcp
     healthCheckPath: /healthz
-    disk:
-      name: assessment-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: HOST
         value: 0.0.0.0
       - key: PORT
         value: 10000
       - key: ENISA_MCP_DATA_DIR
-        value: /var/data
-      - key: MCP_API_KEY
-        generateValue: true
+        value: ./data
+      - key: MCP_ALLOWED_ORIGINS
+        value: https://chatgpt.com

@@ -136,7 +136,7 @@ fn list_assessments()->Result<Value,String>{
     Ok(json!({"assessments":out}))
 }
 fn delete(args:&Value)->Result<Value,String>{let path=file_for(arg_str(args,"assessment_id")?)?;fs::remove_file(path).map_err(|_|"Assessment not found or cannot delete".to_string())?;Ok(json!({"deleted":true}))}
-fn schema_tool(name:&str,desc:&str,schema:Value)->Value{json!({"name":name,"description":desc,"inputSchema":schema})}
+fn schema_tool(name:&str,desc:&str,schema:Value)->Value{json!({"name":name,"description":desc,"inputSchema":schema,"securitySchemes":[{"type":"noauth"}]})}
 fn tools()->Vec<Value>{vec![
     schema_tool("get_question_bank","Get the original, unofficial People/Processes/Technology questionnaire (12 or 30 items).",json!({"type":"object","properties":{"mode":{"type":"string","enum":["quick","full"]}},"additionalProperties":false})),
     schema_tool("create_assessment","Create a local persistent cyber maturity assessment.",json!({"type":"object","properties":{"organization":{"type":"string"},"mode":{"type":"string","enum":["quick","full"]}},"required":["organization"],"additionalProperties":false})),
@@ -151,7 +151,7 @@ fn handle(req:&Value)->Option<Value>{
     let id=req.get("id").cloned().unwrap_or(Value::Null);let method=req.get("method").and_then(Value::as_str).unwrap_or("");
     if req.get("id").is_none(){return None;}
     match method {
-        "initialize"=>Some(response(id,json!({"protocolVersion":req.pointer("/params/protocolVersion").and_then(Value::as_str).filter(|v| SUPPORTED_VERSIONS.contains(v)).unwrap_or("2025-11-25"),"capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"enisa-sme-mcp","version":"0.3.0"}}))),
+        "initialize"=>Some(response(id,json!({"protocolVersion":req.pointer("/params/protocolVersion").and_then(Value::as_str).filter(|v| SUPPORTED_VERSIONS.contains(v)).unwrap_or("2025-11-25"),"capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"enisa-sme-mcp","version":"0.3.1"}}))),
         "ping"=>Some(response(id,json!({}))),
         "tools/list"=>Some(response(id,json!({"tools":tools()}))),
         "tools/call"=>{
