@@ -1,0 +1,5 @@
+interface:
+  display_name: Guided assessment
+  short_description: Use when the user wants to answer, continue, resume or edit a
+    cybersecurity maturity questionnaire o
+  default_prompt: Continue my assessment one question at a time in the form.

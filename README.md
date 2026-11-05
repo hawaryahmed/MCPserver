@@ -1,4 +1,4 @@
-# SME Cyber Maturity MCP — public demo v0.3.1
+# SME Cyber Maturity MCP — public demo v0.4.0
 
 Independent ENISA-informed assessment engine. Not an official ENISA product or grading system.
 
@@ -21,13 +21,13 @@ Assessment files use the ephemeral `./data` directory. Records are lost on resta
 3. If the old paid deployment has a disk, export any records you want to keep before detaching it. Free services cannot have persistent disks. Removing the disk block from YAML does not guarantee Render deletes an existing disk or stops its charges. Check the Render dashboard and remove the old disk yourself after backup.
 4. Remove the old `MCP_API_KEY` environment variable if desired. The demo ignores it and never requires a key.
 5. Set `MCP_ALLOWED_ORIGINS=https://chatgpt.com` (included in the Blueprint). Requests without an Origin header are accepted; unexpected Origin headers remain blocked.
-6. Verify `/healthz` returns version `0.3.1`. Until then, the older authenticated version may still be running.
+6. Verify `/healthz` returns version `0.4.0`. Until then, the older authenticated version may still be running.
 
 ## Connect through ChatGPT
 
 Server URL: `https://sme-cyber-maturity-mcp.onrender.com/mcp`
 
-Choose **No Authentication**, not OAuth. Recreate or update the connection if ChatGPT cached the old OAuth setting. No client ID, client secret, API key, or OAuth discovery endpoint is needed. All six tools declare `securitySchemes: [{"type":"noauth"}]`.
+Choose **No Authentication**, not OAuth. Recreate or update the connection if ChatGPT cached the old OAuth setting. No client ID, client secret, API key, or OAuth discovery endpoint is needed. All eight tools declare `securitySchemes: [{"type":"noauth"}]`.
 
 This is a public, shared demo. Anyone reaching it can list, read, change and delete assessments. Use fictitious data only. There is no user/tenant isolation, OAuth, application audit trail or rate limit. All six tools remain available for demonstration.
 
@@ -71,3 +71,22 @@ Tools: `get_question_bank`, `create_assessment`, `record_answer`, `calculate_mat
 - https://modelcontextprotocol.io/specification/2025-11-25/basic/transports
 
 See `VALIDATION.md` for actual verification results.
+
+
+## Interactive assessment in ChatGPT
+
+Call **Assessment overview** (`assessment_overview`) to open the embedded artifact. It starts with domains, scope and the demo notice, then asks one question at a time. Each question includes a multiline answer, score, evidence reference, responsible role, plain-language explanation, illustrative answer example and optional follow-up answer. Back, Save & Next, Unknown, resume by ID and results review are included. Existing answers remain compatible.
+
+New read actions: **Assessment overview** and **View assessment** (`get_assessment`). Existing tools now declare read/write annotations so ChatGPT can group them. `resources/list` and `resources/read` serve the UI resource. Only the overview render tool owns a UI template; form actions update it without creating duplicate artifacts.
+
+The `chatgpt-plugin/` directory contains the exact connected app binding plus three packaged skills: **Assessment overview**, **Guided assessment**, **Results and 90-day plan**. The native plugin settings layout belongs to ChatGPT; this package supplies the skill metadata and action annotations shown in that layout. It does not replace ChatGPT's settings page.
+
+After merging/deploying, refresh the existing app's tools (or recreate the connection if cached) and say **Show my assessment overview**. The installed skill update alone cannot add a UI to a server that has not been deployed. The plugin keeps its existing identity and connected App.
+
+## Widget development (development only)
+
+The production server remains Rust and uses the same native Render Free config. Browser HTML/CSS/JavaScript is bundled in `web/dist/assessment.html` and embedded into the Rust executable. Render's build needs no Node or Python runtime.
+
+To modify the widget: `cd web && npm ci && npm run build`. Commit the generated HTML with the source. CI checks reproducibility, compiles the Rust server and exercises the form in a browser through an MCP Apps bridge. The bridge test is not a substitute for testing on each ChatGPT client.
+
+Reference: https://developers.openai.com/plugins/build/chatgpt-ui

@@ -45,7 +45,7 @@ const TECHNOLOGY: [&str;10] = [
 ];
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct Answer { value: String, #[serde(default)] evidence: Option<String>, #[serde(default)] owner: Option<String>, #[serde(default)] na_justification: Option<String>, #[serde(default)] verified_at: Option<String> }
+struct Answer { value: String, #[serde(default)] answer_text: Option<String>, #[serde(default)] follow_up_answer: Option<String>, #[serde(default)] evidence: Option<String>, #[serde(default)] owner: Option<String>, #[serde(default)] na_justification: Option<String>, #[serde(default)] verified_at: Option<String> }
 #[derive(Debug, Serialize, Deserialize)]
 struct Assessment { id:String, organization:String, mode:String, #[serde(default)] answers:BTreeMap<String,Answer> }
 
@@ -74,7 +74,7 @@ fn arg_str<'a>(args:&'a Value,key:&str)->Result<&'a str,String>{args.get(key).an
 fn optional_string(args:&Value,key:&str)->Option<String>{args.get(key).and_then(Value::as_str).map(|s|s.trim().to_string()).filter(|s|!s.is_empty())}
 fn question_bank(args:&Value)->Result<Value,String>{
     let mode=args.get("mode").and_then(Value::as_str).unwrap_or("full");if mode!="full"&&mode!="quick" {return Err("mode must be quick or full".into());}
-    Ok(json!({"mode":mode,"official_enisa":false,"score_scale":{"0":"Absent","1":"Ad hoc","2":"Partial","3":"Consistent","4":"Measured, tested, improved","U":"Unknown","NA":"Not applicable (requires justification)"},"questions":ids(mode).into_iter().map(|(id,domain,text)|json!({"id":id,"domain":domain,"text":text})).collect::<Vec<_>>()}))
+    Ok(json!({"mode":mode,"official_enisa":false,"score_scale":{"0":"Absent","1":"Ad hoc","2":"Partial","3":"Consistent","4":"Measured, tested, improved","U":"Unknown","NA":"Not applicable (requires justification)"},"questions":ids(mode).into_iter().map(|(id,domain,text)|guided::question(&id,domain,text)).collect::<Vec<_>>()}))
 }
 fn create(args:&Value)->Result<Value,String>{
     let organization=arg_str(args,"organization")?.trim();if organization.is_empty()||organization.len()>160{return Err("organization must be 1–160 chars".into())}
@@ -88,7 +88,7 @@ fn record(args:&Value)->Result<Value,String>{
     let val=arg_str(args,"value")?.trim().to_uppercase();
     if !["0","1","2","3","4","U","NA"].contains(&val.as_str()){return Err("value must be 0–4, U, or NA".into())}
     let justification=optional_string(args,"na_justification");if val=="NA"&&justification.is_none(){return Err("NA requires na_justification".into())}
-    let answer=Answer{value:val,evidence:optional_string(args,"evidence"),owner:optional_string(args,"owner"),na_justification:justification,verified_at:optional_string(args,"verified_at")};
+    let answer=Answer{value:val,answer_text:optional_string(args,"answer_text"),follow_up_answer:optional_string(args,"follow_up_answer"),evidence:optional_string(args,"evidence"),owner:optional_string(args,"owner"),na_justification:justification,verified_at:optional_string(args,"verified_at")};
     a.answers.insert(id.clone(),answer);save(&a)?;Ok(json!({"assessment_id":a.id,"question_id":id,"saved":true,"answered":a.answers.len(),"total":ids(&a.mode).len()}))
 }
 fn maturity(score:f64)->&'static str {if score<25.0{"Initial"}else if score<50.0{"Developing"}else if score<75.0{"Managed"}else{"Improving"}}
@@ -137,26 +137,52 @@ fn list_assessments()->Result<Value,String>{
 }
 fn delete(args:&Value)->Result<Value,String>{let path=file_for(arg_str(args,"assessment_id")?)?;fs::remove_file(path).map_err(|_|"Assessment not found or cannot delete".to_string())?;Ok(json!({"deleted":true}))}
 fn schema_tool(name:&str,desc:&str,schema:Value)->Value{json!({"name":name,"description":desc,"inputSchema":schema,"securitySchemes":[{"type":"noauth"}]})}
-fn tools()->Vec<Value>{vec![
+fn tools()->Vec<Value>{let mut list = vec![
+    schema_tool("assessment_overview","Open the interactive assessment artifact. ALWAYS start here before asking assessment questions. Shows overview, then one question at a time with answer fields, explanations and examples. Pass assessment_id to resume.",json!({"type":"object","properties":{"assessment_id":{"type":"string"}},"additionalProperties":false})),
+    schema_tool("get_assessment","Read saved answers, progress, and question-specific guidance for one assessment.",json!({"type":"object","properties":{"assessment_id":{"type":"string"}},"required":["assessment_id"],"additionalProperties":false})),
     schema_tool("get_question_bank","Get the original, unofficial People/Processes/Technology questionnaire (12 or 30 items).",json!({"type":"object","properties":{"mode":{"type":"string","enum":["quick","full"]}},"additionalProperties":false})),
     schema_tool("create_assessment","Create a local persistent cyber maturity assessment.",json!({"type":"object","properties":{"organization":{"type":"string"},"mode":{"type":"string","enum":["quick","full"]}},"required":["organization"],"additionalProperties":false})),
-    schema_tool("record_answer","Record an answer, reference to evidence, owner and NA justification.",json!({"type":"object","properties":{"assessment_id":{"type":"string"},"question_id":{"type":"string"},"value":{"type":"string","enum":["0","1","2","3","4","U","NA"]},"evidence":{"type":"string"},"owner":{"type":"string"},"na_justification":{"type":"string"},"verified_at":{"type":"string"}},"required":["assessment_id","question_id","value"],"additionalProperties":false})),
+    schema_tool("record_answer","Record an answer, reference to evidence, owner and NA justification.",json!({"type":"object","properties":{"assessment_id":{"type":"string"},"question_id":{"type":"string"},"value":{"type":"string","enum":["0","1","2","3","4","U","NA"]},"answer_text":{"type":"string"},"follow_up_answer":{"type":"string"},"evidence":{"type":"string"},"owner":{"type":"string"},"na_justification":{"type":"string"},"verified_at":{"type":"string"}},"required":["assessment_id","question_id","value"],"additionalProperties":false})),
     schema_tool("calculate_maturity","Compute domain scores, coverage, caveats and a prioritized 30/60/90-day gap plan.",json!({"type":"object","properties":{"assessment_id":{"type":"string"}},"required":["assessment_id"],"additionalProperties":false})),
     schema_tool("list_assessments","List assessments in the server's local storage.",json!({"type":"object","properties":{},"additionalProperties":false})),
     schema_tool("delete_assessment","Delete one assessment from local storage.",json!({"type":"object","properties":{"assessment_id":{"type":"string"}},"required":["assessment_id"],"additionalProperties":false}))
-]}
+];
+for t in &mut list {
+    let name = t["name"].as_str().unwrap().to_owned();
+    let read = !["create_assessment","record_answer","delete_assessment"].contains(&name.as_str());
+    let title = match name.as_str() {
+        "assessment_overview"=>"Assessment overview", "get_assessment"=>"View assessment", "get_question_bank"=>"View questions and guidance",
+        "calculate_maturity"=>"View results and 90-day plan", "list_assessments"=>"List assessments", "create_assessment"=>"Start assessment",
+        "record_answer"=>"Save or update answer", _=>"Delete assessment"
+    };
+    t["title"] = json!(title);
+    t["annotations"] = json!({"title":title,"readOnlyHint":read,"destructiveHint":name=="delete_assessment","idempotentHint":read || name=="record_answer","openWorldHint":false});
+    t["_meta"] = json!({"ui":{"visibility":["model","app"]},"openai/widgetAccessible":true,"securitySchemes":[{"type":"noauth"}]});
+    if name == "assessment_overview" {
+        t["_meta"]["ui"]["resourceUri"] = json!(guided::URI);
+        t["_meta"]["openai/outputTemplate"] = json!(guided::URI);
+        t["_meta"]["openai/toolInvocation/invoking"] = json!("Opening assessment…");
+        t["_meta"]["openai/toolInvocation/invoked"] = json!("Assessment ready");
+        t["_meta"]["openai/ui"] = json!({"entrypoints":[{"type":"thread"}],"availableDisplayModes":["inline","fullscreen"]});
+    }
+}
+list
+}
 fn response(id:Value,result:Value)->Value{json!({"jsonrpc":"2.0","id":id,"result":result})}
 fn error(id:Value,code:i32,message:String)->Value{json!({"jsonrpc":"2.0","id":id,"error":{"code":code,"message":message}})}
 fn handle(req:&Value)->Option<Value>{
     let id=req.get("id").cloned().unwrap_or(Value::Null);let method=req.get("method").and_then(Value::as_str).unwrap_or("");
     if req.get("id").is_none(){return None;}
     match method {
-        "initialize"=>Some(response(id,json!({"protocolVersion":req.pointer("/params/protocolVersion").and_then(Value::as_str).filter(|v| SUPPORTED_VERSIONS.contains(v)).unwrap_or("2025-11-25"),"capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"enisa-sme-mcp","version":"0.3.1"}}))),
+        "initialize"=>Some(response(id,json!({"protocolVersion":req.pointer("/params/protocolVersion").and_then(Value::as_str).filter(|v| SUPPORTED_VERSIONS.contains(v)).unwrap_or("2025-11-25"),"capabilities":{"tools":{"listChanged":false},"resources":{}},"serverInfo":{"name":"enisa-sme-mcp","version":"0.4.0"}}))),
         "ping"=>Some(response(id,json!({}))),
+        "resources/list"=>Some(response(id,json!({"resources":[guided::resource()]}))),
+        "resources/templates/list"=>Some(response(id,json!({"resourceTemplates":[]}))),
+        "resources/read"=>Some(match guided::read(req.pointer("/params/uri").and_then(Value::as_str).unwrap_or("")) { Ok(v)=>response(id,v),Err(e)=>error(id,-32602,e) }),
         "tools/list"=>Some(response(id,json!({"tools":tools()}))),
         "tools/call"=>{
             let p=req.get("params").unwrap_or(&Value::Null);let name=p.get("name").and_then(Value::as_str).unwrap_or("");let a=p.get("arguments").unwrap_or(&Value::Null);
-            let out=match name {"get_question_bank"=>question_bank(a),"create_assessment"=>create(a),"record_answer"=>record(a),"calculate_maturity"=>calculate(a),"list_assessments"=>list_assessments(),"delete_assessment"=>delete(a),_=>Err(format!("Unknown tool: {name}"))};
+            let out=match name {"assessment_overview"=>guided::render(a),"get_assessment"=>guided::get(a),"get_question_bank"=>question_bank(a),"create_assessment"=>create(a),"record_answer"=>record(a),"calculate_maturity"=>calculate(a),"list_assessments"=>list_assessments(),"delete_assessment"=>delete(a),_=>Err(format!("Unknown tool: {name}"))};
             Some(response(id,match out{Ok(v)=>json!({"content":[{"type":"text","text":v.to_string()}],"structuredContent":v,"isError":false}),Err(e)=>json!({"content":[{"type":"text","text":e}],"isError":true})}))
         },
         _=>Some(error(id,-32601,format!("Method not found: {method}")))
@@ -179,6 +205,7 @@ mod tests{
 }
 
 mod http;
+mod guided;
 const SUPPORTED_VERSIONS: &[&str] = &["2025-03-26", "2025-06-18", "2025-11-25"];
 #[tokio::main]
 async fn main() {

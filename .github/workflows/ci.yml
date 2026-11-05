@@ -5,6 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - run: git diff --exit-code -- web/dist/assessment.html
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo test --locked --manifest-path server/Cargo.toml
       - run: cargo build --locked --manifest-path server/Cargo.toml
@@ -13,3 +21,7 @@ jobs:
       - run: python3 tests/smoke.py
         env:
           MCP_TEST_BINARY: server/target/release/enisa-sme-mcp
+      - run: npx playwright install --with-deps chromium --only-shell
+        working-directory: web
+      - run: npm test
+        working-directory: web

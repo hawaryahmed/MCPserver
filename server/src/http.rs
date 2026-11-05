@@ -70,7 +70,7 @@ async fn post(State(app): State<App>, headers: HeaderMap, bytes: Bytes) -> Respo
 }
 fn router(app: App) -> Router {
     Router::new()
-        .route("/healthz", get(|| async { Json(json!({"status":"ok","version":"0.3.1"})) }))
+        .route("/healthz", get(|| async { Json(json!({"status":"ok","version":"0.4.0"})) }))
         .route("/mcp", get(no_stream).post(post).delete(no_stream))
         .layer(DefaultBodyLimit::max(256 * 1024))
         .with_state(app)

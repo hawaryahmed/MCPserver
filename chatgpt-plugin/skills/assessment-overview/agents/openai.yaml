@@ -1,0 +1,5 @@
+interface:
+  display_name: Assessment overview
+  short_description: Use when the user wants to start a cybersecurity maturity assessment,
+    asks what the app does, or req
+  default_prompt: Show my assessment overview before we start.
